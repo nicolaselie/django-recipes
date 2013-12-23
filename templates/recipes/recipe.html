@@ -1,0 +1,44 @@
+{% extends "recipes/base.html" %}
+
+{% block title %}{{ recipe.title }}{% endblock %}
+
+{% block content %}
+    <div id="images">
+        <img src="{{ MEDIA_URL }}{{ recipe.big_picture }}" />
+        <img src="{{ MEDIA_URL }}{{ recipe.small_picture }}" />
+    </div>
+    
+    <h1>{{ recipe.title }}</h1>
+    
+    <div id="meta">
+        {% if recipe.preparation_time %}<p><span class="cookingsymbol">g</span>{{ recipe.preparation_time }}</p>{% endif %}
+        {% if recipe.baking_time %}<p><span class="cookingsymbol">O</span>{{ recipe.baking_time }}, <span class="cookingsymbol">t</span>{{ recipe.baking_temperature }}°C<span class="cookingsymbol">F</span></p>{% endif %}
+        {% if recipe.portion %}<p><span class="cookingsymbol">d</span>{{ recipe.portion }}</p>{% endif %}
+        {% if recipe.source %}<p><span class="cookingsymbol">p</span>{{ recipe.source }}</p>{% endif %}
+    </div>
+    
+    <div id="ingredients">
+        <p>Ingrédients</p>
+        <ul>
+        {% for ingredient in ingredients %}
+            <li><div class="left">{{ ingredient.quantity|safe }}</div><div class="right">{{ ingredient.name|safe }}</div></li>
+        {% endfor %}
+        </ul>
+    </div>
+    
+    <div id="recipe">
+        <p>Préparation</p>
+        <ol>
+        {% for step in steps %}
+            <li>{{ step|safe }}</li>
+        {% endfor %}
+        </ol>
+    </div>
+    
+    {% if recipe.hint %}
+    <div id="hint">
+        <p>Astuce</p>
+        {{ recipe.hint }}
+    </div>
+    {% endif %}
+{% endblock %}
