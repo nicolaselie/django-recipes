@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from recipes.models import Recipe, Category
+from recipes.models import Recipe, Category, Source, BakingInfo
 from django.core.files import File
 
 def save_file(obj, filepath):
@@ -10,7 +10,11 @@ def save_file(obj, filepath):
 # Users
 ###
 admin = User.objects.all()[0]
-user = User.objects.create_user("mathilde", "mathilde@localhost", "123456")
+user = User.objects.filter(username="mathilde")
+if user:
+    user = user[0]
+if not user:
+    user = User.objects.create_user("mathilde", "mathilde@localhost", "123456")
 
 ###
 # Categories
@@ -30,9 +34,8 @@ entrees.save()
 ###
 
 recipe = Recipe(title="Cake Olives-Jambon", author=admin,
-                preparation_time="20min", baking_time="45min",
-                baking_temperature="190", portion="5-6",
-                source="Nadine")
+                preparation_time="20min",
+                portion="5-6")
 save_file(recipe.small_picture, 'test/cake jambon olives.jpg')
 save_file(recipe.big_picture, 'test/ingredients.jpg')
 recipe.ingredients = """vin blanc sec: 15cL
@@ -50,12 +53,20 @@ Faire cuire dans un moule à cake beurré et fariné."""
 recipe.category = plats
 recipe.save()
 
+temp = BakingInfo(type='FO', temperature='190', time="45min")
+temp.recipe = recipe
+temp.save()
+
+source = Source(name="Nadine")
+source.save()
+recipe.sources = [source, ]
+recipe.save()
+
 ###
 
 recipe = Recipe(title="Cannelés Bordelais", author=user,
-                preparation_time="45min", baking_time="1h15min",
-                baking_temperature="275", portion="12 gros cannelés",
-                source="Digi")
+                preparation_time="45min",
+                portion="12 gros cannelés")
 save_file(recipe.small_picture, 'test/canneles.jpg')
 save_file(recipe.big_picture, 'test/ingredients.jpg')
 recipe.hint = """Laisser reposer la préparation pendant au moins une nuit au réfrigérateur pour que les canelés montent bien pendant la cuisson !
@@ -76,12 +87,21 @@ Enfourner 5 min à 275°C. Descendre la température du four à 180°C et laisse
 recipe.category = desserts
 recipe.save()
 
+temp = BakingInfo(type='FO', temperature='250', time="1h15min")
+temp.recipe = recipe
+temp.save()
+
+source = Source(name="Digi")
+source.save()
+recipe.sources = [source, ]
+recipe.save()
+
+
 ###
 
 recipe = Recipe(title="Crêpes Salé-Sucré", author=admin,
                 preparation_time="20min",
-                portion="12 crêpes",
-                source="Le Creuset")
+                portion="12 crêpes")
 save_file(recipe.small_picture, 'test/crepes.jpg')
 save_file(recipe.big_picture, 'test/ingredients.jpg')
 recipe.ingredients = """farine de sarrasin: 100g
@@ -100,4 +120,9 @@ Verser la valeur d'une petite louche dans la crépière et utiliser le rateau po
 Laisser cuire jusqu'à formation de bulles à la surface, décoller alors les bords et retourner la galette à l'aide d'une spatule.
 Poser les galettes cuites sur un plat et les couvrir de manière à les conserver au chaud."""
 recipe.category = desserts
+recipe.save()
+
+source = Source(name="Le Creuset")
+source.save()
+recipe.sources = [source, ]
 recipe.save()

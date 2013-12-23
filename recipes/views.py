@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 import re
 
@@ -23,59 +23,57 @@ class Ingredient:
         self.name = name.strip()
         self.quantity = quantity.strip()
 
-def list_recipes(request, recipes):
-    """Render a list of selected recipes"""
-    return render(request, 'recipes/recipes.html', {'recipes': recipes})
-
 ###
 # Views
 ###
 
 class ListRecipes(ListView):
+    """List all recipes"""
     model = Recipe
     context_object_name = "recipes"
-    template_name = "recipes/recipes.html"
     paginate_by = 5
-
-def list_recipes_by_date(request, month, year):
+    
+class ListRecipesByDate(ListRecipes):
     """List all recipes corresponding to the current month and year"""
-    recipes = Recipe.objects.filter(date__year=year, 
-                                    date__month=month)
-    return list_recipes(request, recipes)
-
-def list_recipes_by_category(request, id):
+    def get_queryset(self):
+        year, month = self.kwargs['year'], self.kwargs['month']
+        return Recipe.objects.filter(modification_time__year=year, 
+                                     modification_time__month=month)
+    
+class ListRecipesByCategory(ListRecipes):
     """List all recipes in the selected category"""
-    recipes = Recipe.objects.filter(category=id)
-    return list_recipes(request, recipes)
+    def get_queryset(self):
+        pk = self.kwargs['id']
+        return Recipe.objects.filter(category=pk)
 
-def home(request):
-    """Homepage, list all recipes"""
-    return list_recipes(request, Recipe.objects.all())
-
-def view_recipe(request, id):
-    """ Render a recipe from it's id """
-   
-    recipe = get_object_or_404(Recipe, id=id)
+class RecipeView(DetailView):
+    model = Recipe
+    context_object_name = "recipe"
     
-    ingredients = []
-    for line in recipe.ingredients.split('\n'):
-        line = line.strip()
-        line = FRAC_RE.sub(sub_frac, line)
-        if ':' in line:
-            l = line.split(':')
-            ingred = Ingredient(name=l[0], quantity=l[1])
-        else:
-            ingred = Ingredient(name=line, quantity="")
-        ingredients.append(ingred)
+    def get_context_data(self, **kwargs):
+        context = super(RecipeView, self).get_context_data(**kwargs)
+        recipe = context['recipe']
+        print dir(recipe)
         
-    steps = []
-    for line in recipe.content.split('\n'):
-        line = line.strip()
-        #line = UNITS_RE.sub(sub_units, line)
-        line = FRAC_RE.sub(sub_frac, line)
-        steps.append(line)
-    
-    data = {'recipe': recipe,
-            'ingredients': ingredients,
-            'steps': steps}
-    return render(request, 'recipes/recipe.html', data)
+        ingredients = []
+        for line in recipe.ingredients.split('\n'):
+            line = line.strip()
+            line = FRAC_RE.sub(sub_frac, line)
+            if ':' in line:
+                l = line.split(':')
+                ingred = Ingredient(name=l[0], quantity=l[1])
+            else:
+                ingred = Ingredient(name=line, quantity="")
+            ingredients.append(ingred)
+        
+        steps = []
+        for line in recipe.content.split('\n'):
+            line = line.strip()
+            #line = UNITS_RE.sub(sub_units, line)
+            line = FRAC_RE.sub(sub_frac, line)
+            steps.append(line)
+        
+        context['ingredients'] = ingredients
+        context['steps'] = steps
+        
+        return context

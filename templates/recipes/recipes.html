@@ -1,7 +1,0 @@
-{% extends "recipes/base.html" %}
-
-{% block content %}
-    {% for recipe in recipes %}        
-        <p><a href="{% url "recipes.views.view_recipe" recipe.id %}" >{{ recipe.title }}</a></p> 
-    {% endfor %}
-{% endblock %}
