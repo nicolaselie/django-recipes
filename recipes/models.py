@@ -43,6 +43,8 @@ class Recipe(models.Model):
     author = models.ForeignKey(User, editable=False)
     calory = models.IntegerField(null=True, blank=True)
     sources = models.ManyToManyField(Source, blank=True)
+    cost = models.IntegerField(null=True, blank=True)
+    difficulty = models.IntegerField(null=True, blank=True)
     small_picture = StdImageField(upload_to='media', null=True, blank=True,
                                   size=(240, 180, True),
                                   thumbnail_size=(50, 50, True))
