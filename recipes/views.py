@@ -53,7 +53,6 @@ class RecipeView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(RecipeView, self).get_context_data(**kwargs)
         recipe = context['recipe']
-        print dir(recipe)
         
         ingredients = []
         for line in recipe.ingredients.split('\n'):

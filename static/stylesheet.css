@@ -29,6 +29,10 @@ body {
 h1 {
     font-family: 'frca10regular';
     background-color: #92cc47;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     margin: 0px;
     padding-top: 14px;
     padding-left: 20px;
@@ -36,6 +40,13 @@ h1 {
 
 div#images {
     text-align: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+div#meta {
+    padding-top: 100px;
 }
 
 div#meta>p {
@@ -48,6 +59,7 @@ div#ingredients {
     float: right;
     color: lightgrey;
     font-weight: bold;
+    padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 20px;
 }
@@ -73,6 +85,7 @@ div#ingredients div.right {
 }
 
 div#recipe {
+    padding-top: 20px;
     padding-right: 20px;
 }
 
@@ -126,6 +139,10 @@ div#hint>p {
     font-style: normal;
     font-size: 1.2em;
     color: red;
+}
+
+div#recipes {
+    padding-top: 100px;
 }
 
 span.cookingsymbol {

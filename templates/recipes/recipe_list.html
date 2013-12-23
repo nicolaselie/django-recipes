@@ -1,19 +1,23 @@
 {% extends "recipes/base.html" %}
 
 {% block content %}
-    {% for recipe in recipes %}        
+    <h1>Toutes les recettes</h1>
+    
+    <div id="recipes">
+        {% for recipe in recipes %}        
         <p><a href="{% url "recipe_by_slug" recipe.slug %}" >{{ recipe.title }}</a></p> 
-    {% endfor %}
+        {% endfor %}
+    </div>
     
     {% if is_paginated %}
-        <div class="pagination">
-            {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}">Précédente</a>{% endif %}
-                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
-            {% if page_obj.has_next %}
-                — <a href="?page={{ page_obj.next_page_number }}">Suivante</a>
-            {% endif %}
-        </div>
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Précédente</a>{% endif %}
+        Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
+        {% if page_obj.has_next %}
+        — <a href="?page={{ page_obj.next_page_number }}">Suivante</a>
+        {% endif %}
+    </div>
     {% endif %}
 
 {% endblock %}
