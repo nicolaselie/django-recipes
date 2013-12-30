@@ -43,7 +43,6 @@ class RecipeAdmin(admin.ModelAdmin):
         
     def save_model(self, request, obj, form, change):
         """ Autofill in author when blank on save models. """
-        print obj.rating
         obj.author = request.user
         obj.save()
         

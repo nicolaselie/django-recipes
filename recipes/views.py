@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, MonthArchiveView
 
 import re
 
@@ -27,20 +27,30 @@ class Ingredient:
 # Views
 ###
 
-class ListRecipes(ListView):
-    """List all recipes"""
+class RecipesGeneric:
     model = Recipe
     context_object_name = "recipes"
-    paginate_by = 5
-    
-class ListRecipesByDate(ListRecipes):
+    paginate_by = 4
+
+class RecipesListView(RecipesGeneric, ListView):
+    """List all recipes"""
+    pass
+
+class RecipesMonthArchiveView(RecipesGeneric, MonthArchiveView):
+    """List all recipes corresponding to the current month and year"""
+    date_field = "modification_time"
+    make_object_list = True
+    allow_future = True
+    #allow_empty = True
+
+class ListRecipesByDate(RecipesListView):
     """List all recipes corresponding to the current month and year"""
     def get_queryset(self):
         year, month = self.kwargs['year'], self.kwargs['month']
         return Recipe.objects.filter(modification_time__year=year, 
                                      modification_time__month=month)
     
-class ListRecipesByCategory(ListRecipes):
+class ListRecipesByCategory(RecipesListView):
     """List all recipes in the selected category"""
     def get_queryset(self):
         pk = self.kwargs['id']

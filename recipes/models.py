@@ -47,10 +47,10 @@ class Recipe(models.Model):
     difficulty = models.IntegerField(null=True, blank=True)
     small_picture = StdImageField(upload_to='media', null=True, blank=True,
                                   size=(240, 180, True),
-                                  thumbnail_size=(50, 50, True))
+                                  thumbnail_size=(200, 200, True))
     big_picture = StdImageField(upload_to='media', null=True, blank=True,
                                   size=(240, 180, True),
-                                  thumbnail_size=(50, 50, True))
+                                  thumbnail_size=(200, 200, True))
     hint = models.TextField(blank=True)
     ingredients = models.TextField()
     content = models.TextField()

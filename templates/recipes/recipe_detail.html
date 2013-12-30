@@ -6,8 +6,8 @@
     <h1>{{ recipe.title }}</h1>
     
     <div id="images">
-        <img src="{{ MEDIA_URL }}{{ recipe.big_picture }}" />
-        <img src="{{ MEDIA_URL }}{{ recipe.small_picture }}" />
+        <img src="{{ recipe.big_picture.url }}" />
+        <img src="{{ recipe.small_picture.url }}" />
     </div>
     
     <div id="meta">
