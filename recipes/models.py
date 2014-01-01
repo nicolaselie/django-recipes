@@ -23,7 +23,7 @@ class Source(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
-    slug = models.SlugField(max_length=100)
+    slug = models.SlugField(max_length=100, null=True, blank=True)
     description = models.TextField(blank=True)
     
     class Meta:
@@ -34,10 +34,14 @@ class Category(models.Model):
 
     def __unicode__(self):
         return u"%s" % self.name
+    
+    def save(self, **kwargs):
+        unique_slugify(self, self.name)
+        super(Category, self).save()
 
 class Recipe(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100)
+    slug = models.SlugField(max_length=100, null=True, blank=True)
     preparation_time = timedelta.fields.TimedeltaField(null=True, blank=True)
     portion = models.CharField(max_length=100, blank=True)
     author = models.ForeignKey(User, editable=False)

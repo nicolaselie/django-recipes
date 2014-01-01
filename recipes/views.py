@@ -27,34 +27,31 @@ class Ingredient:
 # Views
 ###
 
-class RecipesGeneric:
+class RecipesMixin:
     model = Recipe
     context_object_name = "recipes"
     paginate_by = 4
 
-class RecipesListView(RecipesGeneric, ListView):
+class RecipesListView(RecipesMixin, ListView):
     """List all recipes"""
     pass
 
-class RecipesMonthArchiveView(RecipesGeneric, MonthArchiveView):
+class RecipesMonthArchiveView(RecipesMixin, MonthArchiveView):
     """List all recipes corresponding to the current month and year"""
     date_field = "modification_time"
     make_object_list = True
     allow_future = True
     #allow_empty = True
-
-class ListRecipesByDate(RecipesListView):
-    """List all recipes corresponding to the current month and year"""
-    def get_queryset(self):
-        year, month = self.kwargs['year'], self.kwargs['month']
-        return Recipe.objects.filter(modification_time__year=year, 
-                                     modification_time__month=month)
     
-class ListRecipesByCategory(RecipesListView):
+class RecipesCategoryView(RecipesListView):
     """List all recipes in the selected category"""
     def get_queryset(self):
-        pk = self.kwargs['id']
-        return Recipe.objects.filter(category=pk)
+        if 'pk' in self.kwargs:
+            pk = self.kwargs['pk']
+            return Recipe.objects.filter(category=pk)
+        else:
+            slug = self.kwargs['slug']
+            return Recipe.objects.filter(category__slug=slug)
 
 class RecipeView(DetailView):
     model = Recipe
