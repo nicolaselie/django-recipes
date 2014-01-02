@@ -5,9 +5,12 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="{% static 'stylesheet.css' %}" type="text/css" charset="utf-8" />
-        <title>{% block title %}My Cooking book{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'stylesheet.css' %}" type="text/css" />
+        <title>{% block head-title %}My Cooking book{% endblock %}</title>
     </head>
     
-    <body>{% block content %}{% endblock %}</body>
+    <body>
+    <h1>{% block title %}Toutes les recettes{% endblock %}</h1>
+    {% block content %}{% endblock %}
+    </body>
 </html>

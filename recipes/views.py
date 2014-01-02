@@ -2,10 +2,11 @@
 
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, MonthArchiveView
+from django.conf import settings
 
 import re
 
-from recipes.models import Recipe
+from recipes.models import Recipe, Source
 
 #ALLOWED_UNITS = ['°C', 'h', 'min', 's', 'g', 'mg', 'cg', 'L', 'mL', 'cL', 'dL', 'verre']
 
@@ -27,32 +28,66 @@ class Ingredient:
 # Views
 ###
 
-class RecipesMixin:
+class RecipesMixin(object):
     model = Recipe
     context_object_name = "recipes"
     paginate_by = 4
 
 class RecipesListView(RecipesMixin, ListView):
-    """List all recipes"""
-    pass
+    """List all recipes filtered by category, author, difficulty, cost"""
+    
+    def get_queryset(self):
+        if 'category' in self.kwargs:
+            slug = self.kwargs['category']
+            return Recipe.objects.filter(category__slug=slug)
+        elif 'author' in self.kwargs:
+            author = self.kwargs['author']
+            return Recipe.objects.filter(author__username=author)
+        elif 'difficulty' in self.kwargs:
+            difficulty = self.kwargs['difficulty']
+            return Recipe.objects.filter(difficulty=difficulty)
+        elif 'cost' in self.kwargs:
+            cost = self.kwargs['cost']
+            return Recipe.objects.filter(cost=cost)
+        if 'source' in self.kwargs:
+            source = self.kwargs['source']
+            return Recipe.objects.filter(sources__slug=source)
+        else:
+            return Recipe.objects.all()
+            
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
 
+        if 'category' in self.kwargs and context['object_list']:
+            context['category'] = context['object_list'][0].category.name
+        elif 'author' in self.kwargs:
+            context['author'] = self.kwargs['author']
+        elif 'difficulty' in self.kwargs and context['object_list']:
+            context['difficulty'] = context['object_list'][0].get_difficulty()
+        elif 'cost' in self.kwargs and context['object_list']:
+            context['cost'] = context['object_list'][0].get_cost()
+        elif 'source' in self.kwargs and context['object_list']:
+            slug = self.kwargs['source']
+            source = Source.objects.filter(slug=slug)
+            if source:
+                source = source[0]
+            context['source'] = source
+        
+        return context
+        
 class RecipesMonthArchiveView(RecipesMixin, MonthArchiveView):
     """List all recipes corresponding to the current month and year"""
+    template_name = "recipes/recipe_list.html"
     date_field = "modification_time"
     make_object_list = True
     allow_future = True
-    #allow_empty = True
     
-class RecipesCategoryView(RecipesListView):
-    """List all recipes in the selected category"""
-    def get_queryset(self):
-        if 'pk' in self.kwargs:
-            pk = self.kwargs['pk']
-            return Recipe.objects.filter(category=pk)
+    def get_allow_empty(self):
+        if settings.DEBUG:
+            return True
         else:
-            slug = self.kwargs['slug']
-            return Recipe.objects.filter(category__slug=slug)
-
+            return super(MonthArchiveView, self).get_allow_empty()
+            
 class RecipeView(DetailView):
     model = Recipe
     context_object_name = "recipe"

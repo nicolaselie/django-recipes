@@ -1,10 +1,65 @@
 {% extends "recipes/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    {% if month %}
+        Recettes du mois de {{ month|date:"F Y" }}
+    {% elif category %}
+        Recettes de la catégorie : {{ category }}
+    {% elif author %}
+        Recettes de {{ author }}
+    {% elif difficulty %}
+        Recettes de niveau : {{ difficulty }}
+    {% elif cost %}
+        Recettes de coût : {{ cost }}
+    {% elif source %}
+        Recettes empruntées à : {% if source.url %}<a href="{{ source.url }}">{{ source.name }}</a>{% else %}{{ source.name }}{% endif %}
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-    <h1>Toutes les recettes</h1>
-    
     {% include "recipes/pagination.html" %}
     
-    {% include "recipes/recipe_list_sub.html" %}
-
+    {% if month %}
+        {% include "recipes/month_navigation.html" %}
+    {% endif %}
+    
+    {% if recipes %}
+    <ul class="recipe-list">
+        {% for recipe in recipes %}
+        <li class="recipe-item">
+            <a class="recipe-link" href="{% url "recipe_by_slug" recipe.slug %}">
+                <div class="recipe-image">
+                    {% if recipe.small_picture %}
+                    <img src="{{ recipe.small_picture.thumbnail.url }}" alt="{{ recipe.title }}" class="thumbnail" />
+                    {% else %}
+                    <img src="{% static 'nophoto.png' %}" alt="{{ recipe.title }}" class="thumbnail" />
+                    {% endif %}
+                </div>
+                <div class="recipe-title">
+                    {{ recipe.title }}
+                </div>
+            </a>
+            <div class="recipe-detail">
+                <span class="recipe-meta1">
+                    <a href="{% url 'recipes_by_category_slug' category=recipe.category.slug %}">{{ recipe.category }}</a>
+                    {% if recipe.difficulty != None %}
+                    - <a href="{% url 'recipes_by_difficulty' difficulty=recipe.difficulty %}">{{ recipe.get_difficulty }}</a>
+                    {% endif %}
+                    {% if recipe.cost != None %}
+                    - <a href="{% url 'recipes_by_cost' cost=recipe.cost %}">{{ recipe.get_cost }}</a>
+                    {% endif %}
+                </span>
+                <span class="recipe-meta2">Créé le <a href="{% url 'recipes_archive_month' year=recipe.creation_time|date:'Y' month=recipe.creation_time|date:'m' %}">{{ recipe.creation_time|date}}</a> par <a href="{% url 'recipes_by_author' author=recipe.author %}">{{ recipe.author }}</a>.</span>
+                <span class="recipe-meta3">Sources : 
+                {% for source in recipe.sources.all %}<a href="{% url 'recipes_by_source' source=source.slug %}">{{ source.name }}</a>{% if forloop.counter < recipe.sources.all|length %},&nbsp;{% endif %}{% endfor %}
+                </span><br />
+                <span class="recipe-content">{{ recipe.content|truncatechars:200|linebreaksbr }}</span>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 {% endblock %}

@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from django.contrib.auth.models import User
 from recipes.models import Recipe, Category, Source, BakingInfo
 from django.core.files import File
@@ -10,11 +12,11 @@ def save_file(obj, filepath):
 # Users
 ###
 admin = User.objects.all()[0]
-user = User.objects.filter(username="mathilde")
+user = User.objects.filter(username="user")
 if user:
     user = user[0]
 if not user:
-    user = User.objects.create_user("mathilde", "mathilde@localhost", "123456")
+    user = User.objects.create_user("user", "user@localhost", "123456")
 
 ###
 # Categories
@@ -51,6 +53,8 @@ recipe.content = """Dans un saladier, travailler le vin, l'huile et les oeufs ca
 Ajouter la farine, le gruyère rapé, la levure et sel. Terminer par le jambon et les olives coupées en 2.
 Faire cuire dans un moule à cake beurré et fariné."""
 recipe.category = plats
+recipe.cost = 1
+recipe.difficulty = 1
 recipe.save()
 
 temp = BakingInfo(type='FO', temperature='190', time="45min")
@@ -85,6 +89,8 @@ Ajouter petit à petit le lait et le beurre au mélange. Laisser reposer.
 Ajouter un verre de rhum blanc au mélange. Remplir les moules au 3/4.
 Enfourner 5 min à 275°C. Descendre la température du four à 180°C et laisser cuire pendant 1h. Les cannelés doivent être bien dorés !"""
 recipe.category = desserts
+recipe.cost = 2
+recipe.difficulty = 3
 recipe.save()
 
 temp = BakingInfo(type='FO', temperature='250', time="1h15min")
@@ -120,9 +126,50 @@ Verser la valeur d'une petite louche dans la crépière et utiliser le rateau po
 Laisser cuire jusqu'à formation de bulles à la surface, décoller alors les bords et retourner la galette à l'aide d'une spatule.
 Poser les galettes cuites sur un plat et les couvrir de manière à les conserver au chaud."""
 recipe.category = desserts
+recipe.cost = 1
+recipe.difficulty = 1
 recipe.save()
 
 source = Source(name="Le Creuset")
+source.save()
+recipe.sources = [source, ]
+recipe.save()
+
+###
+
+recipe = Recipe(title="Macarons au carambar", author=user,
+                preparation_time="15min",
+                portion="4 personnes")
+save_file(recipe.small_picture, 'test/macarons.jpg')
+recipe.hint = """Il est possible de colorer la pâte des coques avec quelques gouttes de colorant alimentaire. Parfois ma garniture est trop "dure", je la repasse quelques secondes au micro-ondes pour la ramollir un peu."""
+recipe.ingredients = """Pour les coques de macaron :
+- 2 blancs d'oeuf (70g environ)
+- 85g de poudre d'amandes (fine de préférence)
+- 115g de sucre glace
+- 50g de sucre en poudre
+- 1 cuillère à café de Ricorée ou de cacao en poudre (pour la coloration)
+
+Pour la garniture :
+- 50 ml de crème fraiche liquide
+- 50g de chocolat blanc
+- 10 Carambars"""
+recipe.content = """Pour les coques :
+- Mixer le sucre glace avec la poudre d'amandes et la Ricoré (ou le cacao en poudre), puis passer au chinois pour obtenir une poudre fine.
+- Monter les blancs en neige ferme et y incorporer le sucre en poudre.
+- Incorporer le mélange sec dans les blancs d'oeufs.
+- Former les macarons sur une plaque recouverte de papier sulfurisé, à l'aide d'une poche à douille.
+- Laisser crouter 1h puis cuire pendant 15-20 min à 150°.
+
+Pour la garniture :
+- Faire fondre à feu très doux les carambars, le chocolat blanc et la crème liquide.
+- Une fois le mélange homogène, le laisser refroidir 2h au frigo.
+- Garnir les coques avec une cuillère à café ou la poche à douille."""
+recipe.category = desserts
+recipe.cost = 3
+recipe.difficulty = 4
+recipe.save()
+
+source = Source(name="Marmiton", url="http://www.marmiton.org")
 source.save()
 recipe.sources = [source, ]
 recipe.save()

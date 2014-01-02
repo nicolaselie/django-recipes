@@ -20,7 +20,7 @@ class RecipeAdmin(admin.ModelAdmin):
     fieldsets = (
         # Fieldset 1 : meta-info (title, author...)
         ('General', {
-            'fields': ('title', 'sources', 'category',
+            'fields': ('title', 'sources', 'category', 'difficulty', 'cost',
                         'portion', 'calory')
         }),
         # Fieldset 2 : images

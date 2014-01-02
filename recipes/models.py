@@ -7,12 +7,12 @@ import datetime
 
 import timedelta
 from stdimage import StdImageField
-from ratings.handlers import ratings
 
 from slugify import unique_slugify
 
 class Source(models.Model):
     name = models.CharField(max_length=40)
+    slug = models.SlugField(max_length=100, null=True, blank=True, editable=False)
     url = models.URLField(max_length=200, blank=True)
 
     class Meta:
@@ -20,10 +20,14 @@ class Source(models.Model):
         
     def __unicode__(self):
         return self.name
+        
+    def save(self, **kwargs):
+        unique_slugify(self, self.name)
+        super(Source, self).save()
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
-    slug = models.SlugField(max_length=100, null=True, blank=True)
+    slug = models.SlugField(max_length=100, null=True, blank=True, editable=False)
     description = models.TextField(blank=True)
     
     class Meta:
@@ -40,15 +44,31 @@ class Category(models.Model):
         super(Category, self).save()
 
 class Recipe(models.Model):
+    DIFFICULTY_CHOICES = (
+        (1, 'Très facile'),
+        (2, 'Facile'),
+        (3, 'Moyen'),
+        (4, 'Difficile'),
+        (5, 'Très difficile'),
+    )
+    COST_CHOICES = (
+        (1, 'Très bon marché'),
+        (2, 'Bon Marché'),
+        (3, 'Peu cher'),
+        (4, 'Assez cher'),
+        (5, 'Très cher'),
+    )
     title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100, null=True, blank=True)
+    slug = models.SlugField(max_length=100, null=True, blank=True, editable=False)
     preparation_time = timedelta.fields.TimedeltaField(null=True, blank=True)
     portion = models.CharField(max_length=100, blank=True)
     author = models.ForeignKey(User, editable=False)
     calory = models.IntegerField(null=True, blank=True)
     sources = models.ManyToManyField(Source, blank=True)
-    cost = models.IntegerField(null=True, blank=True)
-    difficulty = models.IntegerField(null=True, blank=True)
+    cost = models.IntegerField(choices=COST_CHOICES,
+                               null=True, blank=True)
+    difficulty = models.IntegerField(choices=DIFFICULTY_CHOICES,
+                                     null=True, blank=True)
     small_picture = StdImageField(upload_to='media', null=True, blank=True,
                                   size=(240, 180, True),
                                   thumbnail_size=(200, 200, True))
@@ -65,21 +85,25 @@ class Recipe(models.Model):
 
     class Meta:
         ordering = ["title"]
+        
+    def get_difficulty(self):
+        difficulty_choices = dict(self.DIFFICULTY_CHOICES)
+        if self.difficulty is not None:
+            return difficulty_choices[self.difficulty]
+        else:
+            return ""
+            
+    def get_cost(self):
+        cost_choices = dict(self.COST_CHOICES)
+        if self.cost is not None:
+            return cost_choices[self.cost]
+        else:
+            return ""
 
     def __str__(self):
-        """ 
-        Cette méthode que nous définirons dans tous les modèles
-        nous permettra de reconnaître facilement les différents objets que nous
-        traiterons plus tard et dans l'administration
-        """
         return self.title
     
     def __unicode__(self):
-        """ 
-        Cette méthode que nous définirons dans tous les modèles
-        nous permettra de reconnaître facilement les différents objets que nous
-        traiterons plus tard et dans l'administration
-        """
         return u"%s" % self.title
     
     def save(self, **kwargs):
@@ -129,5 +153,3 @@ class BakingInfo(models.Model):
                                 self.temperature,
                                 unit_choices[self.unit],
                                 self.time)
-
-ratings.register(Recipe)

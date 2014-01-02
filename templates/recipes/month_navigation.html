@@ -1,11 +1,11 @@
 <div class="month-nav">
 {% if previous_month %}
-    <a class="month-prev" href="{% url "recipe_archive_month" previous_month|date:"Y" previous_month|date:"m" %}">&laquo; {{ previous_month|date:"F Y" }}</a>
+    <a class="month-prev" href="{% url "recipes_archive_month" previous_month|date:"Y" previous_month|date:"m" %}">&laquo; {{ previous_month|date:"F Y" }}</a>
 {% endif %}
 {% if previous_month and next_month %}
     <span class="month-sep"></span>
 {% endif %}
 {% if next_month %}
-    <a class="month-prev" href="{% url "recipe_archive_month" next_month|date:"Y" next_month|date:"m" %}">{{ next_month|date:"F Y" }} &raquo;</a>
+    <a class="month-prev" href="{% url "recipes_archive_month" next_month|date:"Y" next_month|date:"m" %}">{{ next_month|date:"F Y" }} &raquo;</a>
 {% endif %}
 </div>

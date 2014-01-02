@@ -14,17 +14,6 @@
 }
 
 @font-face {
-    font-family: 'frca10regular';
-    src: url('frca10-webfont.eot');
-    src: url('frca10-webfont.eot?#iefix') format('embedded-opentype'),
-         url('frca10-webfont.woff') format('woff'),
-         url('frca10-webfont.ttf') format('truetype'),
-         url('frca10-webfont.svg#frca10regular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
   font-family: 'Handlee';
   font-style: normal;
   font-weight: 400;
@@ -41,7 +30,7 @@ body {
 }
 
 h1 {
-    font-family: 'frca10regular';
+    font-family: 'Handlee', sans serif;
     background-color: #92cc47;
     position: fixed;
     top: 0;
@@ -56,6 +45,11 @@ h1 {
 a {
     text-decoration:none;
     color: #668e31;
+}
+
+h1 a {
+    text-decoration: none;
+    color: #000;
 }
 
 /**/
@@ -180,10 +174,11 @@ span.cookingsymbol {
 
 .recipe-list {
     display: block;
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
 .recipe-list li img {
+    padding: 5px;
     width: 200px;
     height: 200px;
 }
@@ -192,30 +187,30 @@ span.cookingsymbol {
     display: block;
     padding: 0;
     background: 0;
-    height: 200px;
+    height: 212px;
     margin-right: 10px;
     margin-bottom: 10px;
 }
 
 .recipe-list li:hover {
-    -webkit-box-shadow: 0 0 0 3px #668e31;
-    -moz-box-shadow: 0 0 0 3px #668e31;
-    box-shadow: 0 0 0 3px #668e31; 
+	-moz-box-shadow: 1px 1px 5px #999;
+	-webkit-box-shadow: 1px 1px 5px #999;
+    box-shadow: 1px 1px 5px #999;
 }
 
-.recipe-list li a {
+.recipe-list li a.recipe-link {
     display: block;
     position: relative;
     overflow: hidden;
-    width: 200px;
-    height: 200px;
+    width: 210px;
+    height: 210px;
     color: #668e31;
     border: 1px solid black;
 }
 
 .recipe-list li .recipe-image {
-    width: 200px;
-    height: 200px;
+    width: 210px;
+    height: 210px;
     overflow: hidden;
     display: block;
     margin: 0;
@@ -225,9 +220,9 @@ span.cookingsymbol {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 180px;
+    width: 190px;
     padding: 10px;
-    font-family: 'Handlee',sans serif;
+    font-family: 'Handlee', sans serif;
     font-size: 16px;
     text-align: center;
     color: #fff;
@@ -236,13 +231,21 @@ span.cookingsymbol {
 
 .recipe-list li .recipe-detail {
     position: relative;
-    left: 220px;
+    margin-left: 220px;
     top: -200px;
     font-size: 14px;
+    width: -220px;
 }
 
-.recipe-list li .recipe-meta {
+.recipe-list li .recipe-meta2{
     font-style: italic;
+    padding-left: 4px;
+    border-left: 1px solid;
+}
+
+.recipe-list li .recipe-meta3{
+    padding-left: 4px;
+    border-left: 1px solid;
 }
 
 .recipe-list li .recipe-content {
