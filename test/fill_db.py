@@ -4,7 +4,10 @@ from django.contrib.auth.models import User
 from recipes.models import Recipe, Category, Source, BakingInfo
 from django.core.files import File
 
+import datetime
+
 def save_file(obj, filepath):
+    '''Helper to upload files programatically'''
     with open(filepath, 'rb') as f:
         obj.save(f.name, File(f), save=False)
 
@@ -66,6 +69,10 @@ source.save()
 recipe.sources = [source, ]
 recipe.save()
 
+date = datetime.datetime.now() - datetime.timedelta(days=30)
+Recipe.objects.filter(pk=recipe.pk).update(creation_time=date,
+              modification_time=date)
+
 ###
 
 recipe = Recipe(title="Cannelés Bordelais", author=user,
@@ -101,6 +108,10 @@ source = Source(name="Digi")
 source.save()
 recipe.sources = [source, ]
 recipe.save()
+
+date = datetime.datetime.now() - datetime.timedelta(weeks=1)
+Recipe.objects.filter(pk=recipe.pk).update(creation_time=date,
+              modification_time=date)
 
 
 ###

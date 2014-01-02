@@ -31,7 +31,13 @@ class Ingredient:
 class RecipesMixin(object):
     model = Recipe
     context_object_name = "recipes"
-    paginate_by = 4
+    paginate_by = 5
+    
+    def get_paginate_by(self, queryset):
+        if hasattr(settings, 'RECIPES_PAGINATE_BY'):
+            return settings.RECIPES_PAGINATE_BY
+        else:
+            return self.paginate_by
 
 class RecipesListView(RecipesMixin, ListView):
     """List all recipes filtered by category, author, difficulty, cost"""

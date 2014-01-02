@@ -1,5 +1,4 @@
 rm db.sqlite3
-#rm media/*
 
 if [ -f initial_data.json ]
 then
@@ -9,4 +8,8 @@ else
     python2 manage.py syncdb
 fi
 
-#python2 manage.py shell < test/fill_db.py
+if [ "$1"=="--fill" ]
+then
+    rm media/*
+    python2 manage.py shell < test/fill_db.py
+fi

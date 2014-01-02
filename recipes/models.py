@@ -107,7 +107,6 @@ class Recipe(models.Model):
         return u"%s" % self.title
     
     def save(self, **kwargs):
-        self.modification_time = datetime.datetime.now()
         unique_slugify(self, self.title)
         super(Recipe, self).save()
     
@@ -122,12 +121,15 @@ class BakingInfo(models.Model):
         (TOP_HEAT, 'Top Heat'),
         (GAS_STOVE, 'Gas Stove'),
     )
+    
     TEMP_CELSIUS = 'C'
     TEMP_FAHRENHEIT = 'F'
+
     TEMPERATURE_UNIT_CHOICES = (
         (TEMP_CELSIUS, '°C'),
         (TEMP_FAHRENHEIT, '°F'),
     )
+    
     type = models.CharField(max_length=2,
                             choices=BAKING_TYPE_CHOICES,
                             default=FAN_OVEN)

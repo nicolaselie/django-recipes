@@ -174,7 +174,7 @@ span.cookingsymbol {
 
 .recipe-list {
     display: block;
-    padding-top: 50px;
+    padding-top: 70px;
 }
 
 .recipe-list li img {
@@ -259,7 +259,7 @@ span.cookingsymbol {
 
 .pagination {
     position: fixed;
-    top: 75px;
+    top: 50px;
     text-align: center;
     padding: 5px 5px 5px 5px;
     z-index: 1000;
@@ -292,7 +292,7 @@ span.cookingsymbol {
 
 .month-nav {
     position: fixed;
-    top: 75px;
+    top: 55px;
     right: 0px;
     text-align: center;
     padding: 5px 5px 5px 5px;

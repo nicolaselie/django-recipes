@@ -49,6 +49,7 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+.directory
 *.sqlite3
 initial_data.json
 mkd2html.py
