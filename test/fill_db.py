@@ -41,8 +41,7 @@ entrees.save()
 recipe = Recipe(title="Cake Olives-Jambon", author=admin,
                 preparation_time="20min",
                 portion="5-6")
-save_file(recipe.small_picture, 'test/cake jambon olives.jpg')
-save_file(recipe.big_picture, 'test/ingredients.jpg')
+save_file(recipe.picture, 'test/cake jambon olives.jpg')
 recipe.ingredients = """vin blanc sec: 15cL
 huile d'olive: 15cL
 oeufs: 4
@@ -78,8 +77,7 @@ Recipe.objects.filter(pk=recipe.pk).update(creation_time=date,
 recipe = Recipe(title="Cannelés Bordelais", author=user,
                 preparation_time="45min",
                 portion="12 gros cannelés")
-save_file(recipe.small_picture, 'test/canneles.jpg')
-save_file(recipe.big_picture, 'test/ingredients.jpg')
+save_file(recipe.picture, 'test/canneles.jpg')
 recipe.hint = """Laisser reposer la préparation pendant au moins une nuit au réfrigérateur pour que les canelés montent bien pendant la cuisson !
 Utiliser une bombe de graisse pour graisser les moules plutôt que du beurre."""
 recipe.ingredients = """lait: 1L
@@ -119,8 +117,7 @@ Recipe.objects.filter(pk=recipe.pk).update(creation_time=date,
 recipe = Recipe(title="Crêpes Salé-Sucré", author=admin,
                 preparation_time="20min",
                 portion="12 crêpes")
-save_file(recipe.small_picture, 'test/crepes.jpg')
-save_file(recipe.big_picture, 'test/ingredients.jpg')
+save_file(recipe.picture, 'test/crepes.jpg')
 recipe.ingredients = """farine de sarrasin: 100g
 farine de blé: 100g
 sel: 1/2 cuil. à café
@@ -151,7 +148,7 @@ recipe.save()
 recipe = Recipe(title="Macarons au carambar", author=user,
                 preparation_time="15min",
                 portion="4 personnes")
-save_file(recipe.small_picture, 'test/macarons.jpg')
+save_file(recipe.picture, 'test/macarons.jpg')
 recipe.hint = """Il est possible de colorer la pâte des coques avec quelques gouttes de colorant alimentaire. Parfois ma garniture est trop "dure", je la repasse quelques secondes au micro-ondes pour la ramollir un peu."""
 recipe.ingredients = """Pour les coques de macaron :
 - 2 blancs d'oeuf (70g environ)
