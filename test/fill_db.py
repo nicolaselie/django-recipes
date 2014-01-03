@@ -149,8 +149,8 @@ recipe = Recipe(title="Macarons au carambar", author=user,
                 preparation_time="15min",
                 portion="4 personnes")
 save_file(recipe.picture, 'test/macarons.jpg')
-recipe.hint = u"""Il est possible de colorer la pâte des coques avec quelques gouttes de colorant alimentaire. Parfois ma garniture est trop "dure", je la repasse quelques secondes au micro-ondes pour la ramollir un peu."""
-recipe.ingredients = """Pour les coques de macaron :
+recipe.hint = """Il est possible de colorer la pâte des coques avec quelques gouttes de colorant alimentaire. Parfois ma garniture est trop "dure", je la repasse quelques secondes au micro-ondes pour la ramollir un peu."""
+recipe.ingredients = u"""Pour les coques de macaron :
 - 2 blancs d'oeuf (70g environ)
 - 85g de poudre d'amandes (fine de préférence)
 - 115g de sucre glace
