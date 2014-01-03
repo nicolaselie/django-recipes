@@ -57,12 +57,16 @@ h1 a {
 /* Detail View */
 /**/
 
-div#images {
+div#picture {
     text-align: center;
     position: fixed;
     top: 0;
     right: 0;
     z-index: 1001;
+}
+
+div#picture img {
+    width: 240px;
 }
 
 div#meta {
@@ -235,7 +239,6 @@ span.cookingsymbol {
     margin-left: 220px;
     top: -200px;
     font-size: 14px;
-    width: -220px;
 }
 
 .recipe-list li .recipe-meta2{

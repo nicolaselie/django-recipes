@@ -5,9 +5,9 @@
 {% block content %}
     <h1>{{ recipe.title }}</h1>
     
-    <div id="images">
+    <div id="picture">
         {% if recipe.picture %}
-        <img src="{{ recipe.picture.url }}" />
+        <img alt="Photo" src="{{ recipe.picture.url }}" />
         {% endif %}
     </div>
     
