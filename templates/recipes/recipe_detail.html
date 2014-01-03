@@ -13,7 +13,9 @@
     
     <div id="meta">
         {% if recipe.preparation_time %}<p><span class="cookingsymbol">g</span>{{ recipe.preparation_time }}</p>{% endif %}
-        {% if recipe.baking_time %}<p><span class="cookingsymbol">O</span>{{ recipe.baking_time }}, <span class="cookingsymbol">t</span>{{ recipe.baking_temperature }}°C<span class="cookingsymbol">F</span></p>{% endif %}
+        {% for bakinginfo in recipe.bakinginfo_set.all %}
+        <p><span class="cookingsymbol">{{ bakinginfo.type }}</span>{{ bakinginfo.time }}, <span class="cookingsymbol">t</span>{{ bakinginfo.temperature }}{{ bakinginfo.get_unit_display }}</p>
+        {% endfor %}
         {% if recipe.portion %}<p><span class="cookingsymbol">d</span>{{ recipe.portion }}</p>{% endif %}
         {% if recipe.source %}<p><span class="cookingsymbol">p</span>{{ recipe.source }}</p>{% endif %}
     </div>

@@ -51,6 +51,7 @@ class Recipe(models.Model):
         (4, 'Difficile'),
         (5, 'Très difficile'),
     )
+    
     COST_CHOICES = (
         (1, 'Très bon marché'),
         (2, 'Bon Marché'),
@@ -58,6 +59,7 @@ class Recipe(models.Model):
         (4, 'Assez cher'),
         (5, 'Très cher'),
     )
+    
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, null=True, blank=True, editable=False)
     preparation_time = timedelta.fields.TimedeltaField(null=True, blank=True)
@@ -94,10 +96,10 @@ class Recipe(models.Model):
         super(Recipe, self).save()
     
 class BakingInfo(models.Model):
-    FAN_OVEN = 'FO'
-    TOP_BOTTOM_HEAT = 'TB'
-    TOP_HEAT = 'TH'
-    GAS_STOVE = 'GS'
+    FAN_OVEN = 'F'
+    TOP_BOTTOM_HEAT = 'H'
+    TOP_HEAT = 'T'
+    GAS_STOVE = 'G'
     BAKING_TYPE_CHOICES = (
         (FAN_OVEN, 'Fan Oven'),
         (TOP_BOTTOM_HEAT, 'Top Bottom Heat'),

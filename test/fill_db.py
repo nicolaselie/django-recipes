@@ -59,7 +59,7 @@ recipe.cost = 1
 recipe.difficulty = 1
 recipe.save()
 
-temp = BakingInfo(type='FO', temperature='190', time="45min")
+temp = BakingInfo(type=BakingInfo.FAN_OVEN, temperature='190', time="45min")
 temp.recipe = recipe
 temp.save()
 
@@ -98,7 +98,7 @@ recipe.cost = 2
 recipe.difficulty = 3
 recipe.save()
 
-temp = BakingInfo(type='FO', temperature='250', time="1h15min")
+temp = BakingInfo(type=BakingInfo.FAN_OVEN, temperature='250', time="1h15min")
 temp.recipe = recipe
 temp.save()
 
