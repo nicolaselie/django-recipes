@@ -5,6 +5,7 @@ from django.db import models
 from django import forms
 
 from pagedown.widgets import AdminPagedownWidget
+from stdimage import StdImageField
 
 from recipes.models import Recipe, Category, Source, BakingInfo
 

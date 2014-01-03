@@ -7,9 +7,20 @@ import datetime
 
 import timedelta
 from stdimage import StdImageField
+
 from markdown import markdown
 
 from slugify import unique_slugify
+from recipes.widgets import DelPreviewAdminFileWidget
+
+class CustomStdImageField(StdImageField):
+    """Custom StdImageField which just add the use of a custom widget"""
+    def formfield(self, **kwargs):
+        """Specify form field and widget to be used on the forms"""
+
+        super(CustomStdImageField, self).formfield(**kwargs)
+        kwargs['widget'] = DelPreviewAdminFileWidget
+        return super(StdImageField, self).formfield(**kwargs)
 
 class Source(models.Model):
     name = models.CharField(max_length=40)
@@ -18,6 +29,9 @@ class Source(models.Model):
 
     class Meta:
         ordering = ["name"]
+
+    def __str__(self):
+        return self.name
         
     def __unicode__(self):
         return self.name
@@ -72,7 +86,7 @@ class Recipe(models.Model):
                                null=True, blank=True)
     difficulty = models.IntegerField(choices=DIFFICULTY_CHOICES,
                                      null=True, blank=True)
-    picture = StdImageField(upload_to='media', null=True, blank=True,
+    picture = CustomStdImageField(upload_to='media', null=True, blank=True,
                                   size=(640, 480, True),
                                   thumbnail_size=(200, 200, True))
     hint = models.TextField(blank=True)
@@ -92,7 +106,7 @@ class Recipe(models.Model):
         return self.title
     
     def __unicode__(self):
-        return u"%s" % self.title
+        return self.title
     
     def save(self, **kwargs):
         unique_slugify(self, self.title)
@@ -140,7 +154,7 @@ class BakingInfo(models.Model):
                                 self.time)
 
     def __unicode__(self):
-        return u'%s: %s%s (%s)' % (self.get_type_display(), 
+        return '%s: %s%s (%s)' % (self.get_type_display(), 
                                 self.temperature,
                                 self.get_unit_display(),
                                 self.time)
