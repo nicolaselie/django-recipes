@@ -6,11 +6,8 @@
     <h1>{{ recipe.title }}</h1>
     
     <div id="images">
-        {% if recipe.big_picture %}
-        <img src="{{ recipe.big_picture.url }}" />
-        {% endif %}
-        {% if recipe.small_picture %}
-        <img src="{{ recipe.small_picture.url }}" />
+        {% if recipe.picture %}
+        <img src="{{ recipe.picture.url }}" />
         {% endif %}
     </div>
     
