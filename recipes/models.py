@@ -7,6 +7,8 @@ import datetime
 
 import timedelta
 from easy_thumbnails.fields import ThumbnailerImageField
+from durationfield.db.models.fields.duration import DurationField
+
 from markdown import markdown
 
 from slugify import unique_slugify
@@ -66,7 +68,7 @@ class Recipe(models.Model):
     
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, null=True, blank=True, editable=False)
-    preparation_time = timedelta.fields.TimedeltaField(null=True, blank=True)
+    preparation_time = DurationField(null=True, blank=True)
     portion = models.CharField(max_length=100, blank=True)
     author = models.ForeignKey(User, editable=False)
     calory = models.IntegerField(null=True, blank=True)

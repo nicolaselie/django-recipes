@@ -5,10 +5,12 @@ from django.db import models
 from django import forms
 
 from pagedown.widgets import AdminPagedownWidget
+from easy_thumbnails.fields import ThumbnailerImageField
+from durationfield.db.models.fields.duration import DurationField
 
 from recipes.models import Recipe, Category, Source, BakingInfo
-from recipes.widgets import PreviewAdminImageWidget
-from easy_thumbnails.fields import ThumbnailerImageField
+from recipes.widgets import PreviewAdminImageWidget, AdminDurationWidget
+
 
 class BakingInfoInline(admin.TabularInline):
     model = BakingInfo
@@ -51,6 +53,7 @@ class RecipeAdmin(admin.ModelAdmin):
     
     formfield_overrides = {
         ThumbnailerImageField: {'widget': PreviewAdminImageWidget(), },
+        DurationField: {'widget': AdminDurationWidget(), },
     }
         
     def save_model(self, request, obj, form, change):
