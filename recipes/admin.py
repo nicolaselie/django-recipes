@@ -21,18 +21,13 @@ class RecipeAdmin(admin.ModelAdmin):
         # Fieldset 1 : meta-info (title, author...)
         ('General', {
             'fields': ('title', 'sources', 'category', 'difficulty', 'cost',
-                        'portion', 'calory')
+                        'portion', 'calory', 'picture')
         }),
-        # Fieldset 2 : images
-        ('Images', {
-            'classes': ['collapse',],
-            'fields': ('small_picture', 'big_picture')
-        }),
-        # Fieldset 3 : content
+        # Fieldset 2 : content
         ('Content', {
             'fields': ('ingredients', 'content', 'hint', 'comment')
         }),
-        # Fieldset 4 : preparation info
+        # Fieldset 3 : preparation info
         ('Preparation', {
             'classes': ['wide',],
             'fields': ('preparation_time', )
