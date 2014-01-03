@@ -82,20 +82,6 @@ class Recipe(models.Model):
 
     class Meta:
         ordering = ["title"]
-        
-    def get_difficulty(self):
-        difficulty_choices = dict(self.DIFFICULTY_CHOICES)
-        if self.difficulty is not None:
-            return difficulty_choices[self.difficulty]
-        else:
-            return ""
-            
-    def get_cost(self):
-        cost_choices = dict(self.COST_CHOICES)
-        if self.cost is not None:
-            return cost_choices[self.cost]
-        else:
-            return ""
 
     def __str__(self):
         return self.title
@@ -123,8 +109,8 @@ class BakingInfo(models.Model):
     TEMP_FAHRENHEIT = 'F'
 
     TEMPERATURE_UNIT_CHOICES = (
-        (TEMP_CELSIUS, '°C'),
-        (TEMP_FAHRENHEIT, '°F'),
+        (TEMP_CELSIUS, u'°C'),
+        (TEMP_FAHRENHEIT, u'°F'),
     )
     
     type = models.CharField(max_length=2,
@@ -138,17 +124,13 @@ class BakingInfo(models.Model):
     recipe = models.ForeignKey(Recipe)
     
     def __str__(self):
-        type_choices = dict(self.BAKING_TYPE_CHOICES)
-        unit_choices = dict(self.TEMPERATURE_UNIT_CHOICES)
-        return '%s: %s%s (%s)' % (type_choices[self.type], 
+        return '%s: %s%s (%s)' % (self.get_type_display(), 
                                 self.temperature,
-                                unit_choices[self.unit],
+                                self.get_unit_display(),
                                 self.time)
 
     def __unicode__(self):
-        type_choices = dict(self.BAKING_TYPE_CHOICES)
-        unit_choices = dict(self.TEMPERATURE_UNIT_CHOICES)
-        return u'%s: %s%s (%s)' % (type_choices[self.type], 
+        return u'%s: %s%s (%s)' % (self.get_type_display(), 
                                 self.temperature,
-                                unit_choices[self.unit],
+                                self.get_unit_display(),
                                 self.time)
