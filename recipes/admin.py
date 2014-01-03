@@ -5,9 +5,10 @@ from django.db import models
 from django import forms
 
 from pagedown.widgets import AdminPagedownWidget
-from stdimage import StdImageField
 
 from recipes.models import Recipe, Category, Source, BakingInfo
+from recipes.widgets import PreviewAdminImageWidget
+from easy_thumbnails.fields import ThumbnailerImageField
 
 class BakingInfoInline(admin.TabularInline):
     model = BakingInfo
@@ -47,6 +48,10 @@ class RecipeAdmin(admin.ModelAdmin):
     )
         
     inlines = [BakingInfoInline]
+    
+    formfield_overrides = {
+        ThumbnailerImageField: {'widget': PreviewAdminImageWidget(), },
+    }
         
     def save_model(self, request, obj, form, change):
         """ Autofill in author when blank on save models. """

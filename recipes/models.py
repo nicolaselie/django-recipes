@@ -6,21 +6,10 @@ from django.contrib.auth.models import User
 import datetime
 
 import timedelta
-from stdimage import StdImageField
-
+from easy_thumbnails.fields import ThumbnailerImageField
 from markdown import markdown
 
 from slugify import unique_slugify
-from recipes.widgets import DelPreviewAdminFileWidget
-
-class CustomStdImageField(StdImageField):
-    """Custom StdImageField which just add the use of a custom widget"""
-    def formfield(self, **kwargs):
-        """Specify form field and widget to be used on the forms"""
-
-        super(CustomStdImageField, self).formfield(**kwargs)
-        kwargs['widget'] = DelPreviewAdminFileWidget
-        return super(StdImageField, self).formfield(**kwargs)
 
 class Source(models.Model):
     name = models.CharField(max_length=40)
@@ -86,9 +75,7 @@ class Recipe(models.Model):
                                null=True, blank=True)
     difficulty = models.IntegerField(choices=DIFFICULTY_CHOICES,
                                      null=True, blank=True)
-    picture = CustomStdImageField(upload_to='media', null=True, blank=True,
-                                  size=(640, 480, True),
-                                  thumbnail_size=(200, 200, True))
+    picture = ThumbnailerImageField(upload_to='media', blank=True)
     hint = models.TextField(blank=True)
     ingredients = models.TextField()
     ingredients_markup = models.TextField(editable=False)

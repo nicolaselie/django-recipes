@@ -44,7 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'stdimage',
+    'easy_thumbnails',
     'pagedown',
     'recipes',
 )
@@ -98,7 +98,7 @@ STATICFILES_DIRS = (
 )
 
 # Media files
-MEDIA_URL = '/media/'
+MEDIA_URL = '/'
 
 #Templates
 TEMPLATE_DIRS = (
@@ -107,3 +107,11 @@ TEMPLATE_DIRS = (
 
 #Recipes
 RECIPES_PAGINATE_BY = 5
+
+#easy-thumbnails
+THUMBNAIL_ALIASES = {
+    '': {
+        'preview': {'size': (640, 480), 'autocrop': True, 'crop': 'smart'},
+        'thumbnail': {'size': (200, 200), 'autocrop': True, 'crop': 'smart'},
+    },
+}
