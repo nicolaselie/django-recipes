@@ -53,7 +53,7 @@
                     {% endif %}
                 </span>
                 <span class="recipe-meta2">Créé le <a href="{% url 'recipes_archive_month' year=recipe.creation_time|date:'Y' month=recipe.creation_time|date:'m' %}">{{ recipe.creation_time|date}}</a> par <a href="{% url 'recipes_by_author' author=recipe.author %}">{{ recipe.author }}</a>.</span>
-                <span class="recipe-meta3">Sources : 
+                <span class="recipe-meta3">Source{{ recipe.sources.all|length|pluralize }} : 
                 {% for source in recipe.sources.all %}<a href="{% url 'recipes_by_source' source=source.slug %}">{{ source.name }}</a>{% if forloop.counter < recipe.sources.all|length %},&nbsp;{% endif %}{% endfor %}
                 </span><br />
                 <span class="recipe-content">{{ recipe.content|truncatechars:200|linebreaksbr }}</span>
