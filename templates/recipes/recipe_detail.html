@@ -22,20 +22,12 @@
     
     <div id="ingredients">
         <p>Ingrédients</p>
-        <ul>
-            {% for ingredient in ingredients %}
-            <li><div class="left">{{ ingredient.quantity|safe }}</div><div class="right">{{ ingredient.name|safe }}</div></li>
-            {% endfor %}
-        </ul>
+        {{ recipe.ingredients_markup|safe }}
     </div>
     
     <div id="recipe">
         <p>Préparation</p>
-        <ol>
-            {% for step in steps %}
-            <li>{{ step|safe }}</li>
-            {% endfor %}
-        </ol>
+        {{ recipe.content_markup|safe }}
     </div>
     
     {% if recipe.hint %}

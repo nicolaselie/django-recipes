@@ -1,3 +1,5 @@
 django-timedeltafield
 django-stdimage
 django-htmlmin
+django-pagedown
+python-markdown

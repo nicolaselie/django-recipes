@@ -1,6 +1,11 @@
 # -*- coding: UTF-8 -*-
 
 from django.contrib import admin
+from django.db import models
+from django import forms
+
+from pagedown.widgets import AdminPagedownWidget
+
 from recipes.models import Recipe, Category, Source, BakingInfo
 
 class BakingInfoInline(admin.TabularInline):
@@ -8,7 +13,13 @@ class BakingInfoInline(admin.TabularInline):
     extra = 0
     fieldsets = ()
 
+class RecipeForm(forms.ModelForm):
+    class Meta:
+        widgets = { 'content' : AdminPagedownWidget(), 
+                    'ingredients' : AdminPagedownWidget(), }
+    
 class RecipeAdmin(admin.ModelAdmin):
+    form = RecipeForm
     list_display   = ('title', 'category', 'author', 
                       'creation_time', 'modification_time')
     list_filter    = ('author', 'creation_time', 'modification_time',

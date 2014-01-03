@@ -7,6 +7,7 @@ import datetime
 
 import timedelta
 from stdimage import StdImageField
+from markdown import markdown
 
 from slugify import unique_slugify
 
@@ -76,7 +77,9 @@ class Recipe(models.Model):
                                   thumbnail_size=(200, 200, True))
     hint = models.TextField(blank=True)
     ingredients = models.TextField()
+    ingredients_markup = models.TextField(editable=False)
     content = models.TextField()
+    content_markup = models.TextField(editable=False)
     category = models.ForeignKey('Category')
     comment = models.TextField(null=True, blank=True)
     creation_time = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -93,6 +96,11 @@ class Recipe(models.Model):
     
     def save(self, **kwargs):
         unique_slugify(self, self.title)
+        
+        # Markdown part from http://www.yaconiello.com/blog/part-1-creating-blog-system-using-django-markdown
+        self.content_markup = markdown(self.content)
+        self.ingredients_markup = markdown(self.ingredients)
+        
         super(Recipe, self).save()
     
 class BakingInfo(models.Model):

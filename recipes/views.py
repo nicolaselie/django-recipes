@@ -97,30 +97,3 @@ class RecipesMonthArchiveView(RecipesMixin, MonthArchiveView):
 class RecipeView(DetailView):
     model = Recipe
     context_object_name = "recipe"
-    
-    def get_context_data(self, **kwargs):
-        context = super(RecipeView, self).get_context_data(**kwargs)
-        recipe = context['recipe']
-        
-        ingredients = []
-        for line in recipe.ingredients.split('\n'):
-            line = line.strip()
-            line = FRAC_RE.sub(sub_frac, line)
-            if ':' in line:
-                l = line.split(':')
-                ingred = Ingredient(name=l[0], quantity=l[1])
-            else:
-                ingred = Ingredient(name=line, quantity="")
-            ingredients.append(ingred)
-        
-        steps = []
-        for line in recipe.content.split('\n'):
-            line = line.strip()
-            #line = UNITS_RE.sub(sub_units, line)
-            line = FRAC_RE.sub(sub_frac, line)
-            steps.append(line)
-        
-        context['ingredients'] = ingredients
-        context['steps'] = steps
-        
-        return context
