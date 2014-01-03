@@ -59,14 +59,19 @@ h1 a {
 
 div#picture {
     text-align: center;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     z-index: 1001;
 }
 
 div#picture img {
-    width: 240px;
+    height: 180px;
+    background-color: #fff;
+    padding: 10px 10px;
+    text-align: center;
+    transform: rotate(5deg);
+    border: 1px solid lightgrey;
 }
 
 div#meta {
@@ -81,19 +86,20 @@ div#meta>p {
 div#ingredients {
     width: 300px;
     float: right;
-    color: lightgrey;
-    font-weight: bold;
+    color: grey;
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 20px;
 }
 
-div#ingredients>p {
+div#ingredients p {
+    padding-left: 20px;
+    font-weight: bold;
     color: grey;
 }
 
-div#ingredients li {
-    list-style-type: none;
+div#ingredients p.section-title {
+    padding-left: 0px;
 }
 
 div#ingredients div.left {
@@ -113,10 +119,21 @@ div#recipe {
     padding-right: 20px;
 }
 
-div#recipe>p {
-    padding-left: 20px;
+div#recipe p {
+    padding-left: 40px;
     font-weight: bold;
 }
+
+div#recipe p.section-title  {
+    padding-left: 20px;
+}
+
+div#ingredients p.section-title, div#recipe p.section-title  {
+    font-family: 'Handlee', sans serif;
+    font-size: 120%;
+}
+
+
 
 /*http://www.alsacreations.com/article/lire/1210-donnez-du-style-a-vos-listes.html*/
 div#recipe ol {
@@ -125,23 +142,21 @@ div#recipe ol {
 }
 
 div#recipe li {
-    padding-left: 20px;
     list-style-type: none;
     counter-increment: step;
-    margin-bottom: 40px;
+    margin-bottom: 2em;
     text-align: justify;
 }
 
 div#recipe li:before {
+    position: relative;
+    top: -10px;
     float: left;
-    width: 1%;
     text-align: right;
     font-family : Times New Roman, Times, serif;
     content: counter(step);
-    padding: 0 20px 6px;
-    margin-right: 8px;
-    vertical-align: top;
-    font-size: 300%;
+    padding: 0 20px;
+    font-size: 2em;
     color: lightgrey;
 }
 /**/
