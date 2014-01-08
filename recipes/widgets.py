@@ -16,4 +16,14 @@ class PreviewAdminImageWidget(AdminFileWidget):
         
 class AdminDurationWidget(AdminTextInputWidget):
     class Media:
-        js = ('%s/js/spinner.js' % STATIC_URL, )
+        js = ('%s/js/jquery-ui-django.js' % STATIC_URL,
+              '%s/js/spinner.js' % STATIC_URL)
+        css = {
+            'all': ('%s/js/jquery-ui.css' % STATIC_URL,)
+        }
+        
+    def __init__(self, attrs=None):
+        final_attrs = {'class': 'vTextField spinner'}
+        if attrs is not None:
+            final_attrs.update(attrs)
+        super(AdminDurationWidget, self).__init__(attrs=final_attrs)

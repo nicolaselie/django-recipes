@@ -133,7 +133,7 @@ class BakingInfo(models.Model):
     unit = models.CharField(max_length=1,
                             choices=TEMPERATURE_UNIT_CHOICES,
                             default=TEMP_CELSIUS)
-    time = timedelta.fields.TimedeltaField(null=True, blank=True)
+    time = DurationField(null=True, blank=True)
     recipe = models.ForeignKey(Recipe)
     
     def __str__(self):

@@ -59,7 +59,7 @@ recipe.cost = 1
 recipe.difficulty = 1
 recipe.save()
 
-temp = BakingInfo(type=BakingInfo.FAN_OVEN, temperature='190', time="45min")
+temp = BakingInfo(type=BakingInfo.FAN_OVEN, temperature='190', time="00:45:00")
 temp.recipe = recipe
 temp.save()
 
@@ -75,7 +75,7 @@ Recipe.objects.filter(pk=recipe.pk).update(creation_time=date,
 ###
 
 recipe = Recipe(title="Cannelés Bordelais", author=user,
-                preparation_time="45min",
+                preparation_time="00:45:00",
                 portion="12 gros cannelés")
 save_file(recipe.picture, 'test/canneles.jpg')
 recipe.hint = u"""Laisser reposer la préparation pendant au moins une nuit au réfrigérateur pour que les canelés montent bien pendant la cuisson !
@@ -98,7 +98,7 @@ recipe.cost = 2
 recipe.difficulty = 3
 recipe.save()
 
-temp = BakingInfo(type=BakingInfo.FAN_OVEN, temperature='250', time="1h15min")
+temp = BakingInfo(type=BakingInfo.FAN_OVEN, temperature='250', time="01:15:00")
 temp.recipe = recipe
 temp.save()
 
@@ -115,7 +115,7 @@ Recipe.objects.filter(pk=recipe.pk).update(creation_time=date,
 ###
 
 recipe = Recipe(title="Crêpes Salé-Sucré", author=admin,
-                preparation_time="20min",
+                preparation_time="00:20:00",
                 portion="12 crêpes")
 save_file(recipe.picture, 'test/crepes.jpg')
 recipe.ingredients = u"""- farine de sarrasin: 100g
@@ -146,7 +146,7 @@ recipe.save()
 ###
 
 recipe = Recipe(title="Macarons au carambar", author=user,
-                preparation_time="15min",
+                preparation_time="00:15:00",
                 portion="4 personnes")
 save_file(recipe.picture, 'test/macarons.jpg')
 recipe.hint = """Il est possible de colorer la pâte des coques avec quelques gouttes de colorant alimentaire. Parfois ma garniture est trop "dure", je la repasse quelques secondes au micro-ondes pour la ramollir un peu."""

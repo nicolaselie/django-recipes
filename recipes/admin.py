@@ -16,6 +16,10 @@ class BakingInfoInline(admin.TabularInline):
     model = BakingInfo
     extra = 0
     fieldsets = ()
+    
+    formfield_overrides = {
+        DurationField: {'widget': AdminDurationWidget(), },
+    }
 
 class RecipeForm(forms.ModelForm):
     class Meta:
