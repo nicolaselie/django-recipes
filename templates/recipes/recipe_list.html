@@ -1,5 +1,6 @@
 {% extends "recipes/base.html" %}
 {% load staticfiles %}
+{% load range %}
 
 {% block title %}
     {% if month %}
@@ -46,10 +47,10 @@
                 <span class="recipe-meta1">
                     <a href="{% url 'recipes_by_category_slug' category=recipe.category.slug %}">{{ recipe.category }}</a>
                     {% if recipe.difficulty != None %}
-                    - <a href="{% url 'recipes_by_difficulty' difficulty=recipe.difficulty %}">{{ recipe.get_difficulty_display }}</a>
+                    - <a href="{% url 'recipes_by_difficulty' difficulty=recipe.difficulty %}" title="{{ recipe.get_difficulty_display }}">{% for source in recipe.difficulty|range %}<img src="{% static 'recipe-difficulty.png' %}" alt="{{ recipe.get_difficulty_display }}" />{% endfor %}</a>
                     {% endif %}
                     {% if recipe.cost != None %}
-                    - <a href="{% url 'recipes_by_cost' cost=recipe.cost %}">{{ recipe.get_cost_display }}</a>
+                    - <a href="{% url 'recipes_by_cost' cost=recipe.cost %}" title="{{ recipe.get_cost_display }}"><img src="{% static 'recipe-cost' %}{{ recipe.cost }}.png" alt="{{ recipe.get_cost_display }}"/></a>
                     {% endif %}
                 </span>
                 <span class="recipe-meta2">Créé le <a href="{% url 'recipes_archive_month' year=recipe.creation_time|date:'Y' month=recipe.creation_time|date:'m' %}">{{ recipe.creation_time|date}}</a> par <a href="{% url 'recipes_by_author' author=recipe.author %}">{{ recipe.author }}</a>.</span>

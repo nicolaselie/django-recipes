@@ -256,6 +256,13 @@ span.cookingsymbol {
     font-size: 14px;
 }
 
+.recipe-list li .recipe-meta1 img{
+    height: 24px;
+    width: auto;
+    vertical-align: bottom;
+    padding: 0;
+}
+
 .recipe-list li .recipe-meta2{
     font-style: italic;
     padding-left: 4px;
