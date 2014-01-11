@@ -69,9 +69,9 @@ class RecipesListView(RecipesMixin, ListView):
         elif 'author' in self.kwargs:
             context['author'] = self.kwargs['author']
         elif 'difficulty' in self.kwargs and context['object_list']:
-            context['difficulty'] = context['object_list'][0].get_difficulty()
+            context['difficulty'] = context['object_list'][0].get_difficulty_display()
         elif 'cost' in self.kwargs and context['object_list']:
-            context['cost'] = context['object_list'][0].get_cost()
+            context['cost'] = context['object_list'][0].get_cost_display()
         elif 'source' in self.kwargs and context['object_list']:
             slug = self.kwargs['source']
             source = Source.objects.filter(slug=slug)
