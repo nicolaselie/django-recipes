@@ -1,4 +1,5 @@
 {% extends "recipes/base.html" %}
+{% load duration %}
 
 {% block title %}{{ recipe.title }}{% endblock %}
 
@@ -12,12 +13,15 @@
     </div>
     
     <div id="meta">
-        {% if recipe.preparation_time %}<p><span class="cookingsymbol">g</span>{{ recipe.preparation_time }}</p>{% endif %}
+        {% if recipe.preparation_time %}<p><span class="cookingsymbol">g</span>{{ recipe.preparation_time|naturalduration }}</p>{% endif %}
         {% for bakinginfo in recipe.bakinginfo_set.all %}
-        <p><span class="cookingsymbol">{{ bakinginfo.type }}</span>{{ bakinginfo.time }}, <span class="cookingsymbol">t</span>{{ bakinginfo.temperature }}{{ bakinginfo.get_unit_display }}</p>
+        <p><span class="cookingsymbol">{{ bakinginfo.type }}</span>{{ bakinginfo.time|naturalduration }}, <span class="cookingsymbol">t</span>{{ bakinginfo.temperature }}{{ bakinginfo.get_unit_display }}</p>
         {% endfor %}
         {% if recipe.portion %}<p><span class="cookingsymbol">d</span>{{ recipe.portion }}</p>{% endif %}
-        {% if recipe.source %}<p><span class="cookingsymbol">p</span>{{ recipe.source }}</p>{% endif %}
+        <p>
+            <span class="cookingsymbol">p</span> 
+            {% for source in recipe.sources.all %}<a href="{% url 'recipes_by_source' source=source.slug %}">{{ source.name }}</a>{% if forloop.counter < recipe.sources.all|length %},&nbsp;{% endif %}{% endfor %}
+        </p>
     </div>
     
     <div id="ingredients">
