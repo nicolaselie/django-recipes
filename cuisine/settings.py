@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'easy_thumbnails',
     'pagedown',
+    'ratings',
     'recipes',
 )
 
@@ -105,6 +106,10 @@ TEMPLATE_DIRS = (
   os.path.join(BASE_DIR, 'templates')
 )
 
+#User management
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
+
 #Recipes
 RECIPES_PAGINATE_BY = 5
 
@@ -115,3 +120,6 @@ THUMBNAIL_ALIASES = {
         'thumbnail': {'size': (200, 200), 'autocrop': True, 'crop': 'smart'},
     },
 }
+
+#Ratings
+RATINGS_RANGE = (1, 5)

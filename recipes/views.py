@@ -1,10 +1,20 @@
 # -*- coding: UTF-8 -*-
 
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, MonthArchiveView
+from django.views.generic import View, ListView, DetailView, MonthArchiveView
+from django.views.generic.edit import FormView
+from django.views.decorators.http import require_POST
+from django.utils.decorators import method_decorator
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import auth
 from django.conf import settings
+from django.http import HttpResponse, HttpResponseForbidden
+from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404
+
+from class_based_auth_views.views import LoginView, LogoutView
 
 import re
+import json
 
 from recipes.models import Recipe, Source
 
@@ -23,6 +33,24 @@ class Ingredient:
     def __init__(self, name, quantity):
         self.name = name.strip()
         self.quantity = quantity.strip()
+
+###
+# Decorators
+###
+
+#http://www.daveoncode.com/2013/10/21/creating-class-based-view-decorators-using-simple-django-function-decorators/
+def require_AJAX(View):
+    """Decorator to require that a class based view only accept AJAX requests."""
+    def ajaxOnly(function):
+        def wrap(request, *args, **kwargs):
+            if not request.is_ajax():
+                return HttpResponseForbidden()
+            return function(request, *args, **kwargs)
+ 
+        return wrap
+ 
+    View.dispatch = method_decorator(ajaxOnly)(View.dispatch)
+    return View
 
 ###
 # Views
@@ -97,3 +125,56 @@ class RecipesMonthArchiveView(RecipesMixin, MonthArchiveView):
 class RecipeView(DetailView):
     model = Recipe
     context_object_name = "recipe"
+    
+class AjaxableMixin(object):
+    """
+    Mixin to add AJAX support to a View.
+    """
+    def render_to_json_response(self, context, **response_kwargs):
+        data = json.dumps(context)
+        response_kwargs['content_type'] = 'application/json'
+        return HttpResponse(data, **response_kwargs)
+        
+@require_AJAX
+class AjaxLoginFormView(FormView):
+    template_name = 'registration/login_fragment.html'
+    form_class = AuthenticationForm
+ 
+@require_AJAX
+class AjaxLogoutFormView(FormView):
+    template_name = 'registration/logout_fragment.html'
+    form_class = AuthenticationForm
+
+class AjaxLoginView(AjaxableMixin, LoginView):
+    def form_invalid(self, form):
+        response = super(AjaxLoginView, self).form_invalid(form)
+        if self.request.is_ajax():
+            return self.render_to_json_response(form.errors, status=400)
+        else:
+            return response
+
+    def form_valid(self, form):
+        response = super(AjaxLoginView, self).form_valid(form)
+        
+        if self.request.is_ajax():
+            username = form.get_user().username
+            data = {'username': username,
+                    'login': reverse('ajax-login-form'),
+                    'logout': reverse('ajax-logout-form'),
+                   }
+            return self.render_to_json_response(data)
+        else:
+            return response
+        
+class AjaxLogoutView(AjaxableMixin, LogoutView):
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated():
+            auth.logout(self.request)
+            
+        if self.request.is_ajax():
+            data = {'login': reverse('ajax-login-form'),
+                    'logout': reverse('ajax-logout-form'),
+                   }
+            return self.render_to_json_response(data)
+        else:
+            return None

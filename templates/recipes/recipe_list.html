@@ -30,19 +30,21 @@
     {% if recipes %}
     <ul class="recipe-list">
         {% for recipe in recipes %}
-        <li class="recipe-item">
-            <a class="recipe-link" href="{% url "recipe_by_slug" recipe.slug %}">
-                <div class="recipe-image">
-                    {% if recipe.picture %}
-                    <img src="{{ recipe.picture.thumbnail.url }}" alt="{{ recipe.title }}" class="thumbnail" />
-                    {% else %}
-                    <img src="{% static 'nophoto.png' %}" alt="{{ recipe.title }}" class="thumbnail" />
-                    {% endif %}
-                </div>
-                <div class="recipe-title">
-                    {{ recipe.title }}
-                </div>
-            </a>
+        <li>
+            <div class="recipe-item">
+                <a class="recipe-link" href="{% url "recipe_by_slug" recipe.slug %}">
+                    <div class="recipe-image">
+                        {% if recipe.picture %}
+                        <img src="{{ recipe.picture.thumbnail.url }}" alt="{{ recipe.title }}" class="thumbnail" />
+                        {% else %}
+                        <img src="{% static 'nophoto.png' %}" alt="{{ recipe.title }}" class="thumbnail" />
+                        {% endif %}
+                    </div>
+                    <span class="recipe-title">
+                        {{ recipe.title }}
+                    </span>
+                </a>
+            </div>
             <div class="recipe-detail">
                 <span class="recipe-meta1">
                     <a href="{% url 'recipes_by_category_slug' category=recipe.category.slug %}">{{ recipe.category }}</a>

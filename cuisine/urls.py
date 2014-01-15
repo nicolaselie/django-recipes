@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'recipes.views.home', name='home'),
     url(r'^', include('recipes.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^ratings/', include('ratings.urls')),
 )
 
 if settings.DEBUG:

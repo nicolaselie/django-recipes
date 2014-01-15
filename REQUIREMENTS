@@ -1,5 +1,7 @@
-django-timedeltafield
+django-durationfield
 easy_thumbnails
 django-htmlmin
 django-pagedown
 python-markdown
+django-class-based-auth-views
+django-simple-ratings

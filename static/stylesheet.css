@@ -29,13 +29,31 @@ body {
     font-family: sans-serif;
 }
 
-h1 {
+div#menu {
+    float: left;
+    width: 15%;
+    max-width: 200px;
+    min-width: 85px;
+    height: 100%;
+    position: fixed;
+    padding-top: 100px;
+    font-size: 12px;
+    border-right: 1px solid #92cc47;
+}
+
+div#content {
+    float: right;
+    width: 85%;
+    padding-top: 100px;
+}
+
+h1#title {
     font-family: 'Handlee', sans serif;
     background-color: #92cc47;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 800%;
     height: 65px;
     margin: 0px;
     padding-top: 14px;
@@ -51,6 +69,10 @@ a {
 h1 a {
     text-decoration: none;
     color: #000;
+}
+
+.hidden {
+    display: none;
 }
 
 /**/
@@ -194,7 +216,19 @@ span.cookingsymbol {
 
 .recipe-list {
     display: block;
-    padding-top: 70px;
+}
+
+.recipe-list li div.recipe-item {
+    float: left;
+    padding-right: 10px;
+}
+
+.recipe-list li .recipe-detail {
+    clear: none;
+    float: left;
+    width: 60%;
+    min-width: 200px;
+    font-size: 14px;
 }
 
 .recipe-list li img {
@@ -213,8 +247,8 @@ span.cookingsymbol {
 }
 
 .recipe-list li:hover {
-	-moz-box-shadow: 1px 1px 5px #999;
-	-webkit-box-shadow: 1px 1px 5px #999;
+    -moz-box-shadow: 1px 1px 5px #999;
+    -webkit-box-shadow: 1px 1px 5px #999;
     box-shadow: 1px 1px 5px #999;
 }
 
@@ -229,6 +263,7 @@ span.cookingsymbol {
 }
 
 .recipe-list li .recipe-image {
+    float: left;
     width: 210px;
     height: 210px;
     overflow: hidden;
@@ -249,14 +284,7 @@ span.cookingsymbol {
     background-color: rgba(0,0,0,0.8);
 }
 
-.recipe-list li .recipe-detail {
-    position: relative;
-    margin-left: 220px;
-    top: -200px;
-    font-size: 14px;
-}
-
-.recipe-list li .recipe-meta1 img{
+.recipe-list li .recipe-meta1 img {
     height: 24px;
     width: auto;
     vertical-align: bottom;

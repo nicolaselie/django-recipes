@@ -6,11 +6,34 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="{% static 'stylesheet.css' %}" type="text/css" />
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/jquery.raty.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/rate.js' %}"></script>
         <title>{% block head-title %}My Cooking book{% endblock %}</title>
     </head>
     
     <body>
-    <h1>{% block title %}Toutes les recettes{% endblock %}</h1>
-    {% block content %}{% endblock %}
+        <h1 id="title">{% block title %}Toutes les recettes{% endblock %}</h1>
+        
+        <div id="menu">
+            <div id="login-info">
+                {% block login %}
+                    {% if user.is_authenticated %}
+                    <div id="logged-in">
+                        {% include 'registration/logout_fragment.html' %}
+                    </div>
+                    {% else %}
+                    <div id="logged-out">
+                        {% include 'registration/login_fragment.html' %}
+                    </div>
+                    {% endif %}
+                {% endblock %}
+            </div>
+        </div>
+        
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
     </body>
 </html>

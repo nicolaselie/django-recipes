@@ -8,10 +8,14 @@ import datetime
 import timedelta
 from easy_thumbnails.fields import ThumbnailerImageField
 from durationfield.db.models.fields.duration import DurationField
+from ratings.models import Ratings, RatedItemBase
 
 from markdown import markdown
 
 from slugify import unique_slugify
+    
+class Rating(RatedItemBase):
+    content_object = models.ForeignKey('Recipe')
 
 class Source(models.Model):
     name = models.CharField(max_length=40)
@@ -85,6 +89,7 @@ class Recipe(models.Model):
     content_markup = models.TextField(editable=False)
     category = models.ForeignKey('Category')
     comment = models.TextField(null=True, blank=True)
+    ratings = Ratings(Rating)
     creation_time = models.DateTimeField(auto_now_add=True, auto_now=False)
     modification_time = models.DateTimeField(auto_now_add=False, auto_now=True)
 

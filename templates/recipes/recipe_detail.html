@@ -1,16 +1,17 @@
 {% extends "recipes/base.html" %}
+{% load staticfiles %}
+{% load ratings_tags %}
 {% load duration %}
 
 {% block title %}{{ recipe.title }}{% endblock %}
 
 {% block content %}
-    <h1>{{ recipe.title }}</h1>
-    
+    {% if recipe.picture %}
     <div id="picture">
-        {% if recipe.picture %}
         <a href="{{ recipe.picture.url }}" ><img alt="Photo" src="{{ recipe.picture.preview.url }}" /></a>
-        {% endif %}
     </div>
+    {% endif %}
+    
     
     <div id="meta">
         {% if recipe.preparation_time %}<p><span class="cookingsymbol">g</span>{{ recipe.preparation_time|naturalduration }}</p>{% endif %}
@@ -22,8 +23,9 @@
             <span class="cookingsymbol">p</span> 
             {% for source in recipe.sources.all %}<a href="{% url 'recipes_by_source' source=source.slug %}">{{ source.name }}</a>{% if forloop.counter < recipe.sources.all|length %},&nbsp;{% endif %}{% endfor %}
         </p>
+        <p><span id="rating" data-number="5" data-score="{{ recipe.ratings.average_score }}" data-path="{% static '' %}" data-rate-url="{{ recipe|rate_url:0 }}" data-unrate-url="{{ recipe|unrate_url }}"></span></p>    
     </div>
-    
+
     <div id="ingredients">
         <p class="section-title">Ingrédients</p>
         {{ recipe.ingredients_markup|safe }}
@@ -39,5 +41,5 @@
         <p>Astuce</p>
         {{ recipe.hint }}
     </div>
-    {% endif %}
+    {% endif %}    
 {% endblock %}

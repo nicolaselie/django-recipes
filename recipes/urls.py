@@ -3,7 +3,9 @@
 from django.conf.urls import patterns, include, url
 from recipes.views import RecipesListView, \
                           RecipesMonthArchiveView, \
-                          RecipeView
+                          RecipeView, \
+                          AjaxLoginView, AjaxLogoutView, \
+                          AjaxLoginFormView, AjaxLogoutFormView
 
 urlpatterns = patterns('recipes.views',
     url(r'^$', RecipesListView.as_view(), name='home'),
@@ -42,4 +44,10 @@ urlpatterns = patterns('recipes.views',
     url(r'^source/(?P<source>[-\w]+)/$',
         RecipesListView.as_view(),
         name='recipes_by_source'),
+    
+    #User login/logout
+    url(r'^login/$', AjaxLoginView.as_view(), name="login"),
+    url(r'^logout/$', AjaxLogoutView.as_view(), name="logout"),
+    url(r'^ajax-login-form/$', AjaxLoginFormView.as_view(), name="ajax-login-form"),
+    url(r'^ajax-logout-form/$', AjaxLogoutFormView.as_view(), name="ajax-logout-form"),
 )
