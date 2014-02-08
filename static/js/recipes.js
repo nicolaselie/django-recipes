@@ -174,6 +174,8 @@ $(document).ready(function() {
         bindPostRatingHandler();
     }
 
+    $('#rating img').tooltip();
+
     //login
     bindPostLoginHandler();
     

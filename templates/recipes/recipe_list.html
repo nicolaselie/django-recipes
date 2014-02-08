@@ -37,13 +37,13 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <p class="text-center">
-                            <a class="thumbnail thumbnail-list" href="{% url "recipe_by_slug" recipe.slug %}"{% if recipe.title|length > 25 %} title="{{ recipe.title }}" data-toggle="tooltip" {% endif%}>
+                            <a class="thumbnail thumbnail-list" href="{% url "recipe_by_slug" recipe.slug %}"{% if recipe.title|length > 35 %} title="{{ recipe.title }}" data-toggle="tooltip" {% endif%}>
                                 {% if recipe.picture %}
                                 <img src="{{ recipe.picture.thumbnail.url }}" alt="{{ recipe.title }}" />
                                 {% else %}
                                 <img src="{% static 'nophoto.png' %}" alt="{{ recipe.title }}"/>
                                 {% endif %}
-                                <span class="label label-caption">{{ recipe.title|truncatechars:25 }}</span>
+                                <span class="label label-caption font-handlee">{{ recipe.title|truncatechars:35 }}</span>
                             </a>
                         </p>
                         <p class="text-center">
