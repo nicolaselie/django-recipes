@@ -3,14 +3,15 @@
 from django.contrib import admin
 from django.db import models
 from django import forms
+from django.contrib.comments.admin import CommentsAdmin
 
 from pagedown.widgets import AdminPagedownWidget
 from easy_thumbnails.fields import ThumbnailerImageField
 from durationfield.db.models.fields.duration import DurationField
 
-from recipes.models import Recipe, Category, Source, BakingInfo
-from recipes.widgets import PreviewAdminImageWidget, AdminDurationWidget
-
+from .models import Recipe, Category, Source, BakingInfo, MarkdownComment
+from .widgets import PreviewAdminImageWidget, AdminDurationWidget
+from . import get_model
 
 class BakingInfoInline(admin.TabularInline):
     model = BakingInfo
@@ -44,7 +45,7 @@ class RecipeAdmin(admin.ModelAdmin):
         }),
         # Fieldset 2 : content
         ('Content', {
-            'fields': ('ingredients', 'content', 'hint', 'comment')
+            'fields': ('ingredients', 'content', 'hint')
         }),
         # Fieldset 3 : preparation info
         ('Preparation', {
@@ -76,3 +77,6 @@ class RecipeAdmin(admin.ModelAdmin):
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Category)
 admin.site.register(Source)
+
+if get_model() is MarkdownComment:
+    admin.site.register(MarkdownComment, CommentsAdmin)

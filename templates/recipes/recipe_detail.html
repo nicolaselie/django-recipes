@@ -1,45 +1,89 @@
 {% extends "recipes/base.html" %}
-{% load staticfiles %}
-{% load ratings_tags %}
-{% load duration %}
+{% load staticfiles ratings_tags comments duration %}
 
-{% block title %}{{ recipe.title }}{% endblock %}
+{% block title %}{{ recipe.title }}<small><span class="pull-right" id="rating" data-number="5" data-score="{{ recipe.ratings.average_score }}" data-path="{% static 'lib/jquery/images' %}" data-rate-url="{{ recipe|rate_url:0 }}" data-unrate-url="{{ recipe|unrate_url }}" data-readonly="{% if user.is_authenticated %}false{% else%}true{% endif %}"></span></small>{% endblock %}
 
-{% block content %}
-    {% if recipe.picture %}
-    <div id="picture">
-        <a href="{{ recipe.picture.url }}" ><img alt="Photo" src="{{ recipe.picture.preview.url }}" /></a>
-    </div>
-    {% endif %}
-    
-    
-    <div id="meta">
-        {% if recipe.preparation_time %}<p><span class="cookingsymbol">g</span>{{ recipe.preparation_time|naturalduration }}</p>{% endif %}
-        {% for bakinginfo in recipe.bakinginfo_set.all %}
-        <p><span class="cookingsymbol">{{ bakinginfo.type }}</span>{{ bakinginfo.time|naturalduration }}, <span class="cookingsymbol">t</span>{{ bakinginfo.temperature }}{{ bakinginfo.get_unit_display }}</p>
-        {% endfor %}
-        {% if recipe.portion %}<p><span class="cookingsymbol">d</span>{{ recipe.portion }}</p>{% endif %}
-        <p>
-            <span class="cookingsymbol">p</span> 
-            {% for source in recipe.sources.all %}<a href="{% url 'recipes_by_source' source=source.slug %}">{{ source.name }}</a>{% if forloop.counter < recipe.sources.all|length %},&nbsp;{% endif %}{% endfor %}
-        </p>
-        <p><span id="rating" data-number="5" data-score="{{ recipe.ratings.average_score }}" data-path="{% static '' %}" data-rate-url="{{ recipe|rate_url:0 }}" data-unrate-url="{{ recipe|unrate_url }}"></span></p>    
+{% block content %} 
+    <div class="row">
+        <div class="col-xs-6 col-sm-8 col-md-9">
+            {% if recipe.preparation_time %}
+            <div><span class="cookicon cookicon-gloves padded"></span>{{ recipe.preparation_time|naturalduration }}</div>
+            {% endif %}
+            
+            <div>
+                {% for bakinginfo in recipe.bakinginfo_set.all %}
+                    {% if bakinginfo.type == 'F' %}
+                    <span class="cookicon cookicon-fanoven padded"></span>
+                    {% elif bakinginfo.type == 'H' %}
+                    <span class="cookicon cookicon-topbottomheat padded"></span>
+                    {% elif bakinginfo.type == 'T' %}
+                    <span class="cookicon cookicon-topheat padded"></span>
+                    {% elif bakinginfo.type == 'B' %}
+                    <span class="cookicon cookicon-bottomheat padded"></span>
+                    {% elif bakinginfo.type == 'G' %}
+                    <span class="cookicon cookicon-gasstove padded"></span>
+                    {% endif %}
+                    {{ bakinginfo.time|naturalduration }}, <span class="cookicon cookicon-temperature padded"></span>{{ bakinginfo.temperature }}{{ bakinginfo.get_unit_display }}
+                {% endfor %}
+            </div>
+            
+            {% if recipe.portion %}
+            <div>
+                <span class="cookicon cookicon-dish padded"></span>{{ recipe.portion }}
+            </div>
+            {% endif %}
+            
+            <div>
+                <span class="glyphicon glyphicon-book padded"></span>
+                {% for source in recipe.sources.all %}
+                <a href="{% url 'recipes_by_source' source=source.slug %}">{{ source.name }}</a>
+                {% if forloop.counter < recipe.sources.all|length %},&nbsp;{% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        
+        {% if recipe.picture %}
+        <div class="col-xs-6 col-sm-4 col-md-3 pull-right">
+            <a href="{{ recipe.picture.url }}" class="thumbnail thumbnail-detail">
+                <img class="img-responsive" alt="{{ recipe.title }}" src="{{ recipe.picture.thumbnail.url }}" />
+            </a>
+        </div>
+        {% endif %}
     </div>
 
-    <div id="ingredients">
-        <p class="section-title">Ingrédients</p>
-        {{ recipe.ingredients_markup|safe }}
-    </div>
-    
-    <div id="recipe">
-        <p class="section-title">Préparation</p>
-        {{ recipe.content_markup|safe }}
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3 pull-right" id="ingredients">
+            <h4 class="font-handlee">Ingredients</h4>
+            {{ recipe.ingredients_markup|safe }}
+        </div>
+        
+        <div class="col-xs-12 col-sm-8 col-md-9" id="recipe">
+            <h4 class="font-handlee">Preparation</h4>
+            {{ recipe.content_markup|safe }}
+        </div>
     </div>
     
     {% if recipe.hint %}
-    <div id="hint">
-        <p>Astuce</p>
-        {{ recipe.hint }}
+    <div class="row">
+        <div class="col-xs-12" id="hint">
+            <h4 class="font-handlee">Hint</h4>
+            <blockquote>
+                <p>{{ recipe.hint }}</p>
+            </blockquote>
+        </div>
     </div>
-    {% endif %}    
+    {% endif %}
+
+    <div class="row">
+        <div class="col-xs-12"  id="comment">
+            <hr/>
+            <h4 class="font-handlee">Comments</h4>
+            <div id="comment-list">
+                {% render_comment_list for recipe %}
+            </div>
+            <div id="comment-form">
+                {% render_comment_form for recipe %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

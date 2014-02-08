@@ -29,18 +29,6 @@ body {
     font-family: sans-serif;
 }
 
-div#menu {
-    float: left;
-    width: 15%;
-    max-width: 200px;
-    min-width: 85px;
-    height: 100%;
-    position: fixed;
-    padding-top: 100px;
-    font-size: 12px;
-    border-right: 1px solid #92cc47;
-}
-
 div#content {
     float: right;
     width: 85%;
@@ -69,10 +57,6 @@ a {
 h1 a {
     text-decoration: none;
     color: #000;
-}
-
-.hidden {
-    display: none;
 }
 
 /**/
@@ -144,19 +128,17 @@ div#recipe {
 
 div#recipe p {
     padding-left: 40px;
-    font-weight: bold;
 }
 
 div#recipe p.section-title  {
     padding-left: 20px;
 }
 
-div#ingredients p.section-title, div#recipe p.section-title  {
+p.section-title  {
     font-family: 'Handlee', sans serif;
     font-size: 120%;
+    font-weight: bold;
 }
-
-
 
 /*http://www.alsacreations.com/article/lire/1210-donnez-du-style-a-vos-listes.html*/
 div#recipe ol {
@@ -191,7 +173,7 @@ div#hint {
     margin-bottom: 20px;
     padding-left: 20px;
     padding-top: 15px;
-    background-image: url('hint.png');
+    background-image: url('../hint.png');
     background-repeat:no-repeat;
     background-position:left top;
 }
@@ -358,3 +340,33 @@ span.cookingsymbol {
     border-left: 1px solid #668e31;
     padding-left: 5px;
 }
+
+/**/
+/* Comments */
+/**/
+
+/*div#comment-list p.section-title {
+    font-family: 'Handlee', sans serif;
+    font-size: 120%;
+    font-weight: bold;
+}*/
+
+/*div#comment {
+    padding-left: 20px;
+}*/
+
+/*a.delete-comment {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('../comment-delete.png') no-repeat;
+    background-size: cover;
+    border: 0;
+    text-shadow: none;
+    color: transparent;
+}*/
+
+/*#comment-list img {
+    max-width: 200px;
+    max-height: 200px;
+}*/

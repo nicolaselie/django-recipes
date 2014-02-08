@@ -5,7 +5,7 @@ from recipes.views import RecipesListView, \
                           RecipesMonthArchiveView, \
                           RecipeView, \
                           AjaxLoginView, AjaxLogoutView, \
-                          AjaxLoginFormView, AjaxLogoutFormView
+                          delete_own_comment
 
 urlpatterns = patterns('recipes.views',
     url(r'^$', RecipesListView.as_view(), name='home'),
@@ -48,6 +48,7 @@ urlpatterns = patterns('recipes.views',
     #User login/logout
     url(r'^login/$', AjaxLoginView.as_view(), name="login"),
     url(r'^logout/$', AjaxLogoutView.as_view(), name="logout"),
-    url(r'^ajax-login-form/$', AjaxLoginFormView.as_view(), name="ajax-login-form"),
-    url(r'^ajax-logout-form/$', AjaxLogoutFormView.as_view(), name="ajax-logout-form"),
+    
+    #Comments
+    url(r'^comments/user/delete/(\d+)/$',  delete_own_comment, name='comments-user-delete'),
 )

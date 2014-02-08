@@ -181,3 +181,63 @@ source = Source(name="Marmiton", url="http://www.marmiton.org")
 source.save()
 recipe.sources = [source, ]
 recipe.save()
+
+###
+
+recipe = Recipe(title="Bricks de poires aux épices et au foie gras", author=user,
+                preparation_time="00:20:00",
+                portion="4 personnes")
+recipe.hint = """Fondant-croustillant, enntrée dont les saveurs épicées rappellent le marché de Noël de Strasbourg... Et cette alliance démontre que le foie gras n'est pas réservé aux blancs liquoreux, mais qu'il se marie très bien avec les vins rouges.
+Conseil vin : rouge d'alsace"""
+recipe.ingredients = u"""- 2 poires à chair fine
+- 4 tranches de foie gras
+- 4 feuilles de brick
+- 1 cuillère à soupe de miel
+- 1 noix de beurre
+- 1 cuillère à café d'épices à pain d'épices
+- 15 cl de vin rouge"""
+recipe.content = u"""Préparation de la recette :
+
+Eplucher les poires, puis les faire cuire dans le mélange vin rouge, miel et épices pendant 30 min. Elles doivent être fondantes et colorées de tous les côtés.
+
+Les couper en tranches fines, puis les disposer au milieu d'une feuille de brick. Rabattre deux à deux les côtés de la brick de façon à former un pavé carré.
+
+Former 4 pavés, les faire dorer 5 min de chaque côté dans le beurre à feu doux.
+
+Servir chaud, après avoir disposé une tranche de foie gras mi-cuit sur les pavés..."""
+recipe.category = entrees
+recipe.cost = 4
+recipe.difficulty = 1
+recipe.save()
+
+recipe.sources = [source, ]
+recipe.save()
+
+###
+
+recipe = Recipe(title="Galette des rois normande aux pommes", author=user,
+                preparation_time="00:15:00",
+                portion="8 personnes")
+save_file(recipe.picture, 'test/galette_des_rois_normande_aux_pommes.png')
+recipe.hint = """1 fève bien sûr"""
+recipe.ingredients = u"""-2 disques de pâte feuilletée
+- 1 oeuf pour la dorure
+- 4 ou 5 pommes boskoop
+- 50 à 80 g sucre selon votre goût
+- 50 g de beurre
+- 2 cs de Calvados ou liqueur de pommes"""
+recipe.content = u"""- Eplucher , évider et couper en grosses lamelles les pommes. Faire revenir les pommes dans une poêle avec le beurre. Saupoudrer de sucre , laisser légèrement caraméliser. Ajouter le Calvados , laisser refroidir.
+- Répartir les pommes sur la première pâte feuilletée , déposer la fève. Recouvrir avec la seconde pâte feuilletée. Souder le tour de la galette , cranter pour la déco : j 'ai utilisé le denteleur Demarle.
+- Rayer la galette en faisant des dessins. Réfrigérer 1 heure pour que le feuilletage monte mieux.
+- Dorer à l 'oeuf battu au pinceau
+- Enfourner Th7/210°C 25 minutes environ , baisser à Th6/180°C quand elle est bien levée et dorée.
+- Laisser tiédir et badigeonner d 'un sirop de sucre si vous la voulez brillante."""
+recipe.category = desserts
+recipe.cost = 3
+recipe.difficulty = 2
+recipe.save()
+
+source = Source(name="750g", url="http://www.750g.com/")
+source.save()
+recipe.sources = [source, ]
+recipe.save()

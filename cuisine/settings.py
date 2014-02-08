@@ -32,6 +32,8 @@ ADMINS = (
   ('Nicolas ELIE', 'nicolaselie@free.fr'),
 )
 
+SITE_ID = 1
+
 
 # Application definition
 
@@ -47,6 +49,8 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'pagedown',
     'ratings',
+    'django.contrib.comments',
+    'django.contrib.sites',
     'recipes',
 )
 
@@ -64,7 +68,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'cuisine.urls'
 
 WSGI_APPLICATION = 'cuisine.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -111,15 +114,16 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
 #Recipes
-RECIPES_PAGINATE_BY = 5
+RECIPES_PAGINATE_BY = 10
 
 #easy-thumbnails
 THUMBNAIL_ALIASES = {
     '': {
-        'preview': {'size': (640, 480), 'autocrop': True, 'crop': 'smart'},
-        'thumbnail': {'size': (200, 200), 'autocrop': True, 'crop': 'smart'},
+        'thumbnail': {'size': (240, 180), 'autocrop': True, 'crop': 'smart'},
     },
 }
 
 #Ratings
 RATINGS_RANGE = (1, 5)
+
+COMMENTS_APP = 'recipes'

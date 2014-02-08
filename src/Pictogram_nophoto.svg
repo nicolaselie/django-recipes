@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="240"
+   height="180"
+   id="svg3319"
+   sodipodi:version="0.32"
+   inkscape:version="0.48.4 r9939"
+   version="1.0"
+   sodipodi:docname="Pictogram_nophoto.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/home/nicolas/django-recipes/static/nophoto.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs3321">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective3327" />
+    <inkscape:perspective
+       id="perspective3342"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.2429427"
+     inkscape:cx="116.18052"
+     inkscape:cy="87.66624"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1664"
+     inkscape:window-height="844"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata3324">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Fotografierverbot</dc:title>
+        <dc:date>2008-06-29</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Torrsten Skomp</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Torsten Skomp</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Torsten Skomp</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:language>de_DE</dc:language>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Piktogramm; Fotografierverbot</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>Fotografierverbot als Piktogramm </dc:description>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-5.7959572,-35.224257)">
+    <path
+       style="fill:#babdb6;fill-opacity:1"
+       d="m 165.32721,62.911758 c -1.7401,1e-6 -3.15625,1.384916 -3.15625,3.125 l 0,2.9375 -123.000001,0 c -3.282702,-1e-6 -5.90625,2.623548 -5.90625,5.90625 l 0,106.718752 c 0,3.2827 2.623557,5.93751 5.90625,5.9375 l 173.250001,0 c 3.28269,0 5.90627,-2.6548 5.90625,-5.9375 l 0,-106.718752 c 0,-3.282699 -2.62357,-5.90625 -5.90625,-5.90625 l -9.5625,0 0,-2.9375 c 0,-1.74009 -1.41615,-3.125 -3.15625,-3.125 l -34.375,0 z m -117.718751,15.3125 41.84375,0 c 1.740092,0 3.15625,1.384907 3.15625,3.125 l 0,15.1875 c 0,1.740092 -1.416157,3.125 -3.15625,3.125 l -41.84375,0 c -1.740092,0 -3.125,-1.384907 -3.125,-3.125 l 0,-15.1875 c 0,-1.740092 1.384907,-3.125 3.125,-3.125 z m 99.187501,10.21875 c 21.73475,3e-6 39.375,17.931962 39.375,40.031252 -1e-5,22.09928 -17.64026,40.03125 -39.375,40.03125 -21.73473,1e-5 -39.375,-17.93196 -39.375,-40.03125 0,-22.09929 17.64026,-40.031252 39.375,-40.031252 z m 0,3.5 c -19.83443,0 -35.9375,16.364142 -35.9375,36.531252 0,20.16711 16.10307,36.53126 35.9375,36.53125 19.83443,0 35.9375,-16.36415 35.9375,-36.53125 0,-20.16711 -16.10307,-36.531252 -35.9375,-36.531252 z m 0,4.875 c 17.17768,2e-6 31.125,14.190452 31.125,31.656252 -1e-5,17.4658 -13.94731,31.625 -31.125,31.625 -17.17769,0 -31.125,-14.1592 -31.125,-31.625 0,-17.46581 13.94731,-31.656252 31.125,-31.656252 z m 30.5,76.125002 29.6875,0 c 1.23388,0 2.21875,0.40908 2.21875,0.90625 l 0,4.34375 c 0,0.49717 -0.98487,0.875 -2.21875,0.875 l -29.6875,0 c -1.23389,0 -2.21875,-0.37783 -2.21875,-0.875 l 0,-4.34375 c 0,-0.49717 0.98487,-0.90625 2.21875,-0.90625 z"
+       id="rect3209"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#babdb6;fill-opacity:1"
+       d="m 24.995957,35.224257 c -1.38246,0 -2.721843,0.10871 -4.02,0.315 -0.578121,0.09194 -1.152564,0.207872 -1.71,0.3375 -0.457418,0.106369 -0.908065,0.229395 -1.35,0.36 -0.284385,0.08411 -0.562528,0.176161 -0.84,0.27 -0.386613,0.130399 -0.76761,0.25644 -1.14,0.405 -0.03931,0.01571 -0.08086,0.02909 -0.12,0.045 -0.01974,0.008 -0.0403,0.01444 -0.06,0.0225 -0.520621,0.213008 -1.010261,0.450537 -1.5,0.6975 -0.508203,0.256274 -0.998138,0.541923 -1.47,0.8325 -0.006,0.0037 -0.02406,-0.0037 -0.03,0 -0.01099,0.0068 -0.01903,0.01568 -0.03,0.0225 -0.109454,0.06787 -0.222623,0.132853 -0.33,0.2025 -0.344926,0.224227 -0.6674,0.455551 -0.99,0.6975 -0.421773,0.315402 -0.818885,0.646276 -1.2,0.99 -0.01415,0.01281 -0.01591,0.03215 -0.03,0.045 -0.7632096,0.693121 -1.4594186,1.433247 -2.0399998,2.2275 -0.010826,0.01486 -0.019242,0.03011 -0.03,0.045 -0.2859448,0.394451 -0.5433856,0.798994 -0.78,1.215 -0.017437,0.03072 -0.042839,0.05917 -0.06,0.09 -0.2337954,0.419352 -0.4191116,0.843712 -0.6,1.2825 -0.169555,0.411296 -0.3294275,0.833456 -0.45,1.26 -0.2789625,0.980156 -0.42,1.993116 -0.42,3.0375 l 0,151.200003 c 0,7.9776 8.5631998,14.4 19.1999998,14.4 l 201.600003,0 c 1.38246,0 2.72184,-0.10871 4.02,-0.315 0.57747,-0.0918 1.15311,-0.20786 1.71,-0.3375 0.45697,-0.10638 0.90845,-0.22931 1.35,-0.36 0.28438,-0.0841 0.56253,-0.17616 0.84,-0.27 0.0286,-0.01 0.0615,-0.0127 0.09,-0.0225 0.39803,-0.13623 0.78719,-0.27194 1.17,-0.4275 0.0199,-0.008 0.0402,-0.0144 0.06,-0.0225 0.52248,-0.21411 1.00856,-0.44911 1.5,-0.6975 0.46203,-0.23352 0.91785,-0.4805 1.35,-0.7425 0.049,-0.0297 0.10145,-0.06 0.15,-0.09 0.12145,-0.0751 0.2411,-0.14771 0.36,-0.225 0.34334,-0.22292 0.66869,-0.45706 0.99,-0.6975 0.3226,-0.24195 0.63103,-0.4838 0.93,-0.7425 0.1024,-0.0883 0.20046,-0.1798 0.3,-0.27 0.005,-0.004 -0.005,-0.0179 0,-0.0225 0.38879,-0.35313 0.76694,-0.72215 1.11,-1.1025 0.3306,-0.36653 0.64475,-0.73532 0.93,-1.125 0.0107,-0.0146 0.0194,-0.0304 0.03,-0.045 0.28629,-0.39435 0.54294,-0.79928 0.78,-1.215 0.009,-0.0156 0.0212,-0.0293 0.03,-0.045 0.009,-0.0153 0.0215,-0.0297 0.03,-0.045 0.23152,-0.41417 0.42003,-0.84954 0.6,-1.2825 0.1728,-0.41572 0.32729,-0.82887 0.45,-1.26 0.27897,-0.98027 0.42,-1.99323 0.42,-3.03761 l 0,-151.199893 c 0,-7.9776 -8.5632,-14.4 -19.2,-14.4 l -201.600003,0 z m 14.19,13.9725 183.060003,0 c 2.72708,0 4.92,1.644692 4.92,3.69 l 0,137.317503 L 39.185957,49.196757 z m -14.76,11.0475 187.980003,141.007503 -183.060003,0 c -2.727078,1e-5 -4.92,-1.64469 -4.92,-3.69 l 0,-137.317503 z"
+       id="path3196"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

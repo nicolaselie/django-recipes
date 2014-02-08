@@ -6,7 +6,7 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        Vous êtes connecté, {{ user.username }} !
+        You are connected, {{ user.username }} !
     {% else %}
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}

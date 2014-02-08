@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.comments import Comment
 
 import datetime
 
@@ -88,7 +89,6 @@ class Recipe(models.Model):
     content = models.TextField()
     content_markup = models.TextField(editable=False)
     category = models.ForeignKey('Category')
-    comment = models.TextField(null=True, blank=True)
     ratings = Ratings(Rating)
     creation_time = models.DateTimeField(auto_now_add=True, auto_now=False)
     modification_time = models.DateTimeField(auto_now_add=False, auto_now=True)
@@ -102,24 +102,26 @@ class Recipe(models.Model):
     def __unicode__(self):
         return self.title
     
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
         unique_slugify(self, self.title)
         
         # Markdown part from http://www.yaconiello.com/blog/part-1-creating-blog-system-using-django-markdown
         self.content_markup = markdown(self.content)
         self.ingredients_markup = markdown(self.ingredients)
         
-        super(Recipe, self).save()
+        super(Recipe, self).save(*args, **kwargs)
     
 class BakingInfo(models.Model):
     FAN_OVEN = 'F'
     TOP_BOTTOM_HEAT = 'H'
     TOP_HEAT = 'T'
+    BOTTOM_HEAT = 'B'
     GAS_STOVE = 'G'
     BAKING_TYPE_CHOICES = (
         (FAN_OVEN, 'Fan Oven'),
         (TOP_BOTTOM_HEAT, 'Top Bottom Heat'),
         (TOP_HEAT, 'Top Heat'),
+        (BOTTOM_HEAT, 'Bottom Heat'),
         (GAS_STOVE, 'Gas Stove'),
     )
     
@@ -152,3 +154,11 @@ class BakingInfo(models.Model):
                                 self.temperature,
                                 self.get_unit_display(),
                                 self.time)
+    
+class MarkdownComment(Comment):
+    comment_markup = models.TextField(editable=False)
+        
+    def save(self, *args, **kwargs):
+        # Markdown part from http://www.yaconiello.com/blog/part-1-creating-blog-system-using-django-markdown
+        self.comment_markup = markdown(self.comment)
+        super(MarkdownComment, self).save(*args, **kwargs)

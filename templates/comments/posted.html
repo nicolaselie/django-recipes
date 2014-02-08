@@ -1,0 +1,7 @@
+<div id="c{{ comment.id }}" class="panel panel-default">
+    <div class="panel-heading">
+        <span class="glyphicon glyphicon-comment padded"></span><h3 class="panel-title inline">{{ comment.submit_date }} - {{ comment.name }}</h3>
+        <a class="delete-comment pull-right glyphicon glyphicon-remove {% if not user.is_authenticated or not comment.user == user %}hide{% endif %}" href="{% url 'comments-user-delete' comment.id %}" data-author="{{ comment.user }}"></a>
+    </div>
+    <div class="panel-body">{{ comment.comment_markup|safe }}</div>
+</div>
