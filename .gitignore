@@ -58,3 +58,4 @@ mdx_latex.py
 timedelta3/
 media/
 ratings/
+whoosh_index/

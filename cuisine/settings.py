@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'ratings',
     'django.contrib.comments',
     'django.contrib.sites',
+    'haystack',
     'recipes',
 )
 
@@ -127,3 +128,11 @@ THUMBNAIL_ALIASES = {
 RATINGS_RANGE = (1, 5)
 
 COMMENTS_APP = 'recipes'
+
+# Haystack configuration
+HAYSTACK_CONNECTIONS = {
+    'default': {
+    'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+    'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}

@@ -13,7 +13,8 @@ urlpatterns = patterns('',
     url(r'^', include('recipes.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ratings/', include('ratings.urls')),
-    url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^comments/', include('django.contrib.comments.urls')),   
+    url(r'^search/', include('haystack.urls')),
 )
 
 if settings.DEBUG:

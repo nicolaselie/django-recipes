@@ -5,3 +5,5 @@ django-pagedown
 python-markdown
 django-class-based-auth-views
 django-simple-ratings
+django-haystack
+whoosh

@@ -1,0 +1,4 @@
+{{ object.title }}
+{{ object.content }}
+{{ object.ingredients }}
+{{ object.modification_time }} 
