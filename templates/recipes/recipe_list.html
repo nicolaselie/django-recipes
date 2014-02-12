@@ -1,6 +1,5 @@
 {% extends "recipes/base.html" %}
-{% load staticfiles %}
-{% load range %}
+{% load staticfiles range humanize %}
 
 {% block title %}
     {% if month %}
@@ -64,7 +63,7 @@
                     
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <span class="glyphicon glyphicon-paperclip padded"></span><a href="{% url 'recipes_by_category_slug' category=recipe.category.slug %}">{{ recipe.category }}</a>
+                            <span class="glyphicon glyphicon-paperclip padded"></span><a href="{% url 'recipes_by_category_slug' category=recipe.category.slug %}">{{ recipe.category }}</a>{% if score %}<span class="badge">{{ score|floatformat:"2"|intcomma }}</span>{% endif %}
                         </li>
                         <li class="list-group-item">
                             <span class="glyphicon glyphicon-book padded"></span>{% for source in recipe.sources.all %}<a href="{% url 'recipes_by_source' source=source.slug %}">{{ source.name }}</a>{% if forloop.counter < recipe.sources.all|length %},&nbsp;{% endif %}{% endfor %}

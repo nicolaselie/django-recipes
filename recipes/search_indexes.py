@@ -2,8 +2,8 @@ import datetime
 from haystack import indexes
 from .models import Recipe
 
-class NoteIndex(indexes.SearchIndex, indexes.Indexable):
-    text = indexes.CharField(document=True, use_template=True)
+class RecipeIndex(indexes.SearchIndex, indexes.Indexable):
+    text = indexes.EdgeNgramField(document=True, use_template=True)
     title = indexes.CharField(model_attr='title')
     ingredients = indexes.CharField(model_attr='ingredients')
     content = indexes.CharField(model_attr='content')

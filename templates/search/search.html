@@ -16,8 +16,10 @@
 
 {% block recipe_loop %}
     {% if recipe.object %}
-        {% with recipe.object as recipe %}
+        {% with score=recipe.score recipe=recipe.object %}
             {{ block.super }}
         {% endwith %}
+    {% else %}
+        {{ block.super }}
     {% endif %}
 {% endblock %}
