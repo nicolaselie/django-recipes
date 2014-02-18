@@ -3,7 +3,7 @@
         return ('0' + this).slice(-2);
     }
     
-    $.widget( "ui.durationspinner", $.ui.spinner, {
+    $.widget("ui.durationspinner", $.ui.spinner, {
         options: {
             // seconds
             step: 1,
@@ -11,7 +11,7 @@
             min: 0,
             max: 24*60*60-1,
         },
-
+        
         _parse: function( value ) {
             if ( typeof value === "string" ) {
                 var arr = value.split(':');
@@ -36,8 +36,15 @@
             return hours.pad() + ":" + minutes.pad() + ":" + seconds.pad();
         }
     });
+    
+    var makeSpinner = function () {
+        $(".spinner:not([id*='-__prefix__-'])").durationspinner();
+    };
 
     $(function() {
-        var spinner = $(".spinner").durationspinner();
+        makeSpinner();
+        $(".add-row").delegate("a", "click", function(){
+            makeSpinner();
+        });
     });
 })(django.jQuery);

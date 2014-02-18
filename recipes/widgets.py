@@ -2,8 +2,6 @@ from django.contrib.admin.widgets import AdminFileWidget, AdminTextInputWidget
 from django.utils.safestring import mark_safe
 from django.conf import settings
 
-from pagedown.widgets import PagedownWidget
-
 STATIC_URL = settings.STATIC_URL.rstrip('/')
 
 class PreviewAdminImageWidget(AdminFileWidget):
@@ -30,9 +28,3 @@ class AdminDurationWidget(AdminTextInputWidget):
         if attrs is not None:
             final_attrs.update(attrs)
         super(AdminDurationWidget, self).__init__(attrs=final_attrs)
-        
-class CommentPageDownWidget(PagedownWidget):
-    class Media:
-        css = {
-            'all': ('css/pagedown.css',)
-        }

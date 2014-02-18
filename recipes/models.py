@@ -117,20 +117,24 @@ class BakingInfo(models.Model):
     TOP_HEAT = 'T'
     BOTTOM_HEAT = 'B'
     GAS_STOVE = 'G'
+    PAN = 'P'
     BAKING_TYPE_CHOICES = (
-        (FAN_OVEN, 'Fan Oven'),
-        (TOP_BOTTOM_HEAT, 'Top Bottom Heat'),
-        (TOP_HEAT, 'Top Heat'),
-        (BOTTOM_HEAT, 'Bottom Heat'),
-        (GAS_STOVE, 'Gas Stove'),
+        (FAN_OVEN, u'Fan Oven'),
+        (TOP_BOTTOM_HEAT, u'Top Bottom Heat'),
+        (TOP_HEAT, u'Top Heat'),
+        (BOTTOM_HEAT, u'Bottom Heat'),
+        (GAS_STOVE, u'Gas Stove'),
+        (PAN, u'Pan'),
     )
     
     TEMP_CELSIUS = 'C'
     TEMP_FAHRENHEIT = 'F'
+    TEMP_THERMOSTAT = 'T'
 
     TEMPERATURE_UNIT_CHOICES = (
         (TEMP_CELSIUS, u'°C'),
         (TEMP_FAHRENHEIT, u'°F'),
+        (TEMP_THERMOSTAT, u'Thermostat'),
     )
     
     type = models.CharField(max_length=2,
@@ -143,16 +147,20 @@ class BakingInfo(models.Model):
     time = DurationField(null=True, blank=True)
     recipe = models.ForeignKey(Recipe)
     
+    def get_display(self, *args, **kwargs):
+        if self.unit == self.TEMP_THERMOSTAT:
+            return self.get_unit_display() + " " + str(self.temperature)
+        else:
+            return str(self.temperature) + self.get_unit_display()
+    
     def __str__(self):
-        return '%s: %s%s (%s)' % (self.get_type_display(), 
-                                self.temperature,
-                                self.get_unit_display(),
+        return '%s: %s (%s)' % (self.get_type_display(),
+                                self.get_display(),
                                 self.time)
 
     def __unicode__(self):
-        return '%s: %s%s (%s)' % (self.get_type_display(), 
-                                self.temperature,
-                                self.get_unit_display(),
+        return '%s: %s (%s)' % (self.get_type_display(),
+                                self.get_display(),
                                 self.time)
     
 class MarkdownComment(Comment):

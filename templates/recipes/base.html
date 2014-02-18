@@ -63,24 +63,24 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" id="navbar-user">
+                        <li>
+                            <form class="navbar-form" role="search" method="GET" action="{% url 'haystack_search' %}">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" name="q"{% if query %} value="{{ query }}"{% endif %}>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
                         {% include 'recipes/user.html' %}
                     </ul>
-                    <div class="col-sm-3 col-md-3 pull-right">
-                        <form class="navbar-form" role="search" method="GET" action="{% url 'haystack_search' %}">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search" name="q"{% if query %} value="{{ query }}"{% endif %}>
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
 
         <div class="container">
-            <h3 class="page-header font-handlee">{% block title %}Toutes les recettes{% endblock %}</h3>
+            <h3 class="page-header font-handlee clearfix">{% block title %}Toutes les recettes{% endblock %}</h3>
 
             {% block content %}{% endblock %}
             

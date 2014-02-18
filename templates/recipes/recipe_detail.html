@@ -1,7 +1,9 @@
 {% extends "recipes/base.html" %}
 {% load staticfiles ratings_tags comments duration %}
 
-{% block title %}{{ recipe.title }}<small><span class="pull-right" id="rating" data-number="5" data-score="{{ recipe.ratings.average_score }}" data-path="{% static 'lib/jquery/images' %}" data-rate-url="{{ recipe|rate_url:0 }}" data-unrate-url="{{ recipe|unrate_url }}" data-readonly="{% if user.is_authenticated %}false{% else%}true{% endif %}"></span></small>{% endblock %}
+{% block title %}
+{{ recipe.title }}<small><span class="pull-right text-right" id="rating" data-number="5" data-score="{{ recipe.ratings.average_score }}" data-path="{% static 'lib/jquery/images' %}" data-rate-url="{{ recipe|rate_url:0 }}" data-unrate-url="{{ recipe|unrate_url }}" data-readonly="{% if user.is_authenticated %}false{% else%}true{% endif %}"></span></small>
+{% endblock %}
 
 {% block content %} 
     <div class="row">
@@ -11,20 +13,24 @@
             {% endif %}
             
             <div>
-                {% for bakinginfo in recipe.bakinginfo_set.all %}
-                    {% if bakinginfo.type == 'F' %}
-                    <span class="cookicon cookicon-fanoven padded"></span>
-                    {% elif bakinginfo.type == 'H' %}
-                    <span class="cookicon cookicon-topbottomheat padded"></span>
-                    {% elif bakinginfo.type == 'T' %}
-                    <span class="cookicon cookicon-topheat padded"></span>
-                    {% elif bakinginfo.type == 'B' %}
-                    <span class="cookicon cookicon-bottomheat padded"></span>
-                    {% elif bakinginfo.type == 'G' %}
-                    <span class="cookicon cookicon-gasstove padded"></span>
-                    {% endif %}
-                    {{ bakinginfo.time|naturalduration }}, <span class="cookicon cookicon-temperature padded"></span>{{ bakinginfo.temperature }}{{ bakinginfo.get_unit_display }}
-                {% endfor %}
+                {% spaceless %}
+                    {% for bakinginfo in recipe.bakinginfo_set.all %}
+                        {% if bakinginfo.type == 'F' %}
+                        <span class="cookicon cookicon-fanoven padded"></span>
+                        {% elif bakinginfo.type == 'H' %}
+                        <span class="cookicon cookicon-topbottomheat padded"></span>
+                        {% elif bakinginfo.type == 'T' %}
+                        <span class="cookicon cookicon-topheat padded"></span>
+                        {% elif bakinginfo.type == 'B' %}
+                        <span class="cookicon cookicon-bottomheat padded"></span>
+                        {% elif bakinginfo.type == 'G' %}
+                        <span class="cookicon cookicon-gasstove padded"></span>
+                        {% elif bakinginfo.type == 'P' %}
+                        <span class="cookicon cookicon-pan padded"></span>
+                        {% endif %}
+                        {{ bakinginfo.time|naturalduration }}, <span class="cookicon cookicon-temperature padded"></span>{{ bakinginfo.get_display }}<br/>
+                    {% endfor %}
+                {% endspaceless %}
             </div>
             
             {% if recipe.portion %}

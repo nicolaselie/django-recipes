@@ -21,7 +21,7 @@ import re
 import json
 from urlparse import urlparse
 
-from recipes.models import Recipe, Source, Category
+from .models import Recipe, Source
 
 #ALLOWED_UNITS = ['°C', 'h', 'min', 's', 'g', 'mg', 'cg', 'L', 'mL', 'cL', 'dL', 'verre']
 
@@ -77,12 +77,6 @@ class RecipesMixin(object):
             return settings.RECIPES_PAGINATE_BY
         else:
             return self.paginate_by
-        
-    def get_context_data(self, **kwargs):
-        context = super(RecipesMixin, self).get_context_data(**kwargs)
-        context['available_categories'] = Category.objects.all()
-        context['available_sources'] = Source.objects.all()
-        return context
 
 class RecipesListView(RecipesMixin, ListView):
     """List all recipes filtered by category, author, difficulty, cost"""
